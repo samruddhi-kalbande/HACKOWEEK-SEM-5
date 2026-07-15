@@ -1,4 +1,4 @@
-# Student Information System
+# Student Information Management System
 
 A complete Flask-based student information system with a REST API and responsive dashboard frontend.
 

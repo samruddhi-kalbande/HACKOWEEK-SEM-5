@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A premium Student Information Management System featuring a REST API backend and a responsive glassmorphic dashboard interface.">
+    <title>Student Information Management System</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="stars-background"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo-area">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+                </div>
+                <div>
+                    <h1>SIMS</h1>
+                    <p class="subtitle">Student Information Management System</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <span class="badge">v1.0.0</span>
+            </div>
+        </header>
+
+        <!-- Stats Dashboard -->
+        <section class="stats-grid" id="statsDashboard">
+            <div class="stat-card" id="cardTotalStudents">
+                <div class="stat-icon total-students-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <div class="stat-content">
+                    <span class="stat-label">Total Students</span>
+                    <span class="stat-value" id="statTotalStudents">0</span>
+                </div>
+            </div>
+            <div class="stat-card" id="cardAvgAge">
+                <div class="stat-icon avg-age-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div class="stat-content">
+                    <span class="stat-label">Average Age</span>
+                    <span class="stat-value" id="statAvgAge">0.0</span>
+                </div>
+            </div>
+            <div class="stat-card" id="cardCourses">
+                <div class="stat-icon courses-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                </div>
+                <div class="stat-content">
+                    <span class="stat-label">Active Courses</span>
+                    <span class="stat-value" id="statCourses">0</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Controls (Search, Filters, Add Button) -->
+        <section class="controls-panel">
+            <div class="search-filters">
+                <div class="search-box">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="searchInput" placeholder="Search by name, ID, or course..." autocomplete="off">
+                </div>
+                <div class="filter-box">
+                    <select id="courseFilter" aria-label="Filter by course">
+                        <option value="">All Courses</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn btn-primary" id="openAddModalBtn" onclick="openAddModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Add Student</span>
+            </button>
+        </section>
+
+        <!-- Data Display (Table Container) -->
+        <main class="table-container glass-panel">
+            <div class="table-header">
+                <h2>Student Directory</h2>
+                <span class="results-count" id="resultsCount">Showing 0 students</span>
+            </div>
+            <div class="table-wrapper">
+                <table id="studentsTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Course</th>
+                            <th scope="col" class="actions-col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentTableBody">
+                        <!-- Loaded dynamically -->
+                    </tbody>
+                </table>
+            </div>
+            <!-- Empty state -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <div class="empty-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                </div>
+                <h3>No Students Found</h3>
+                <p>Try refining your search query or add a new student record to get started.</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Student Form Modal (Add & Edit) -->
+    <div class="modal-overlay" id="studentModal" style="display: none;">
+        <div class="modal-card glass-panel">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add New Student</h3>
+                <button class="close-btn" onclick="closeModal()" aria-label="Close modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <form id="studentForm" onsubmit="handleFormSubmit(event)">
+                <input type="hidden" id="actionType" value="add">
+                
+                <div class="form-group">
+                    <label for="studentId">Student ID</label>
+                    <input type="number" id="studentId" placeholder="e.g. 104" required min="1">
+                    <span class="error-msg" id="idError"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="studentName">Full Name</label>
+                    <input type="text" id="studentName" placeholder="e.g. Aaron Smith" required>
+                    <span class="error-msg" id="nameError"></span>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="studentAge">Age</label>
+                        <input type="number" id="studentAge" placeholder="e.g. 21" required min="1" max="120">
+                        <span class="error-msg" id="ageError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentCourse">Course</label>
+                        <input type="text" id="studentCourse" placeholder="e.g. Computer Science" required>
+                        <span class="error-msg" id="courseError"></span>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="submitFormBtn">Add Student</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Toast System -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

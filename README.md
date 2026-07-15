@@ -31,6 +31,16 @@ python app.py
 
 Open `http://localhost:5000` in your browser.
 
+## Screenshot Example
+
+![Student Information System UI](public/screenshot-ui.png)
+
+## GitHub Repository
+
+This project is connected to GitHub at:
+
+https://github.com/samruddhi-kalbande/HACKOWEEK-SEM-5
+
 ## API Endpoints
 
 - `GET /api/students` - Get all students

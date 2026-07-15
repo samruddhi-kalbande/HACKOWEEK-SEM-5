@@ -1,3 +1,29 @@
-node_modules/
-.DS_Store
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.env
+*.venv
+venv/
+ENV/
 .env
+
+# Flask instance folder
+instance/
+
+# SQLite database
+*.db
+
+# IDE and OS files
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Node artifacts
+node_modules/
+package-lock.json
+package.json
+
+# Logs
+*.log

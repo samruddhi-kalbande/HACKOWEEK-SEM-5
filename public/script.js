@@ -1,4 +1,4 @@
-﻿const apiBase = "/api/students";
+const apiBase = "/api/students";
 let studentsCache = [];
 let editingStudentId = null;
 
@@ -9,9 +9,7 @@ function showToast(message, type = "info") {
     toast.textContent = message;
 
     container.appendChild(toast);
-    setTimeout(() => {
-        toast.classList.add("visible");
-    }, 10);
+    requestAnimationFrame(() => toast.classList.add("visible"));
 
     setTimeout(() => {
         toast.classList.remove("visible");
@@ -33,8 +31,7 @@ async function fetchStudents(search = "", course = "") {
 }
 
 function setLoadingState(isLoading) {
-    const resultsCount = document.getElementById("resultsCount");
-    resultsCount.textContent = isLoading ? "Loading students..." : "";
+    document.getElementById("resultsCount").textContent = isLoading ? "Loading students..." : "";
 }
 
 function updateDashboard(students) {
@@ -183,8 +180,7 @@ function validateStudentForm(id, name, age, course) {
 async function handleFormSubmit(event) {
     event.preventDefault();
 
-    const studentIdInput = document.getElementById("studentId");
-    const id = Number(studentIdInput.value.trim());
+    const id = Number(document.getElementById("studentId").value.trim());
     const name = document.getElementById("studentName").value.trim();
     const age = Number(document.getElementById("studentAge").value.trim());
     const course = document.getElementById("studentCourse").value.trim();
@@ -195,10 +191,12 @@ async function handleFormSubmit(event) {
 
     const payload = { id, name, age, course };
     const action = document.getElementById("actionType").value;
+    const url = action === "edit" ? `${apiBase}/${editingStudentId}` : apiBase;
+    const method = action === "edit" ? "PUT" : "POST";
 
     try {
-        const response = await fetch(action === "edit" ? `${apiBase}/${editingStudentId}` : apiBase, {
-            method: action === "edit" ? "PUT" : "POST",
+        const response = await fetch(url, {
+            method,
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
         });
@@ -238,7 +236,6 @@ async function deleteStudent(studentId) {
 function bindControls() {
     document.getElementById("searchInput").addEventListener("input", () => loadStudents());
     document.getElementById("courseFilter").addEventListener("change", () => loadStudents());
-    document.getElementById("studentForm").addEventListener("submit", handleFormSubmit);
 }
 
 window.addEventListener("DOMContentLoaded", () => {

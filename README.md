@@ -1,64 +1,50 @@
-# HACKOWEEK SEM 5
+# Student Information System
 
-Student Information Management System (SIMS) built with Node.js and Express. This project includes a REST API backend for student CRUD operations and a responsive frontend dashboard to manage student records.
+A complete Flask-based student information system with a REST API and responsive dashboard frontend.
 
 ## Features
 
 - Create, read, update, and delete student records
-- Search and course filter support
-- JSON file-backed storage for simplicity
-- Responsive dashboard UI with interactive table and modal forms
-- Clean REST API endpoints for integration with other applications
+- Search by student name, ID, or course
+- Course filter support
+- SQLite storage with SQLAlchemy
+- Responsive dashboard UI served from `public/`
 
-## Tech Stack
+## Requirements
 
-- Node.js
-- Express
-- HTML/CSS/JavaScript frontend
+- Python 3.8+
+- Flask
+- Flask-SQLAlchemy
+- SQLAlchemy
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18+ installed
-
-### Install Dependencies
+## Install
 
 ```bash
-npm install
+pip install -r requirements.txt
 ```
 
-### Run the Application
+## Run
 
 ```bash
-npm start
+python app.py
 ```
 
-Then open `http://localhost:5000` in your browser.
+Open `http://localhost:5000` in your browser.
 
-## API Documentation
+## API Endpoints
 
-### Base URL
+- `GET /api/students` - Get all students
+  - Optional query params: `search`, `course`
+- `GET /api/students/<id>` - Get a single student
+- `POST /api/students` - Create a student
+  - JSON body: `{ "id": 1, "name": "Rahul", "age": 20, "course": "CSE" }`
+- `PUT /api/students/<id>` - Update student
+  - JSON body may include: `name`, `age`, `course`
+- `DELETE /api/students/<id>` - Delete student
+- `GET /health` - Health check endpoint
 
-`http://localhost:5000/api`
+## Notes
 
-### Endpoints
-
-- `GET /api/students` - Get all students. Optional query parameters: `search`, `course`
-- `GET /api/students/:id` - Get a specific student by ID
-- `POST /api/students` - Create a new student
-  - Request body: `{ id, name, age, course }`
-- `PUT /api/students/:id` - Update an existing student
-  - Request body: `{ name, age, course }`
-- `DELETE /api/students/:id` - Delete a student
-
-## Example Requests
-
-```bash
-curl http://localhost:5000/api/students
-curl -X POST http://localhost:5000/api/students -H "Content-Type: application/json" -d '{"id":3,"name":"Anita","age":19,"course":"Physics"}'
-```
-
-## GitHub Repository
-
-This project is linked to a GitHub repository and can be pushed using the `gh` CLI.
+- The first run creates `students.db` automatically.
+- The frontend is served from `public/index.html`.
+- You can also call `/students` and `/students/<id>` with the same REST behavior.

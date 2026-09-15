@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Data Science Foundations Dashboard: Python Essentials, NumPy, Pandas, and Data Visualization for HACKOWEEK SEM 5.">
+  <title>Data Science Studio | Week 3 & 4 HACKOWEEK</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="header-container">
+      <a href="#" class="brand-wrapper">
+        <div class="brand-icon">📈</div>
+        <div class="brand-text">
+          <h1>Data Science Studio</h1>
+          <span class="brand-badge">W3-W4: NumPy &bull; Pandas &bull; Viz</span>
+        </div>
+      </a>
+
+      <nav class="nav-tabs" aria-label="Module Navigation">
+        <button class="nav-btn active" data-tab="viz">
+          <span>🎨</span> Visualizer Gallery
+        </button>
+        <button class="nav-btn" data-tab="pandas">
+          <span>🐼</span> Pandas GroupBy & Merging
+        </button>
+        <button class="nav-btn" data-tab="numpy">
+          <span>⚡</span> NumPy & OOP Playground
+        </button>
+        <button class="nav-btn" data-tab="notebook">
+          <span>📓</span> Jupyter Notebook
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+      <h2>Python Essentials, NumPy, Pandas & Data Visualization</h2>
+      <p>Interactive exploratory environment for Week 3–4 of HACKOWEEK SEM 5. Operating on the unified Kaggle Student Performance dataset and supplementary course enrollment records.</p>
+      <div class="hero-tags">
+        <span class="hero-pill">🐍 Python OOP & Comprehensions</span>
+        <span class="hero-pill">⚡ NumPy Broadcasting & Vectorization</span>
+        <span class="hero-pill">🐼 Pandas Cleaning, Merging & GroupBy</span>
+        <span class="hero-pill">📊 Matplotlib & Seaborn Visualizations</span>
+      </div>
+    </section>
+
+    <!-- Global Key Metrics -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-header">
+          <span class="stat-title">Dataset Size</span>
+          <span style="font-size: 1.2rem;">👥</span>
+        </div>
+        <div class="stat-value" id="kpi-students">20</div>
+        <div class="stat-subtitle">Kaggle student profiles</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-header">
+          <span class="stat-title">Course Enrollments</span>
+          <span style="font-size: 1.2rem;">📚</span>
+        </div>
+        <div class="stat-value" id="kpi-enrollments">83</div>
+        <div class="stat-subtitle">Merged relational records</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-header">
+          <span class="stat-title">Mean CGPA (&mu;)</span>
+          <span style="text-align: right; font-size: 1.2rem;">⭐</span>
+        </div>
+        <div class="stat-value" id="kpi-cgpa">8.41</div>
+        <div class="stat-subtitle" id="kpi-cgpa-sub">Std Dev: &plusmn; 0.72</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-header">
+          <span class="stat-title">Mean Attendance</span>
+          <span style="font-size: 1.2rem;">📅</span>
+        </div>
+        <div class="stat-value" id="kpi-attendance">87.1%</div>
+        <div class="stat-subtitle">Class & lab presence</div>
+      </div>
+    </section>
+
+    <!-- TAB 1: VISUALIZER GALLERY -->
+    <section class="tab-content active" id="pane-viz">
+      <div class="visualizer-layout">
+        <!-- Selector Menu -->
+        <div class="plot-selector-list" id="plots-list-container">
+          <!-- Populated via JS -->
+        </div>
+
+        <!-- Display Area -->
+        <div class="plot-display-card">
+          <h3 id="current-plot-title" style="font-family: var(--font-heading); margin-bottom: 1rem; color: #38bdf8;">CGPA Distribution & KDE Curve</h3>
+          <img id="current-plot-img" src="plots/cgpa_distribution.png" alt="Data Visualization Plot" class="plot-image">
+          <p id="current-plot-desc" class="plot-caption">Kernel Density Estimation and histogram showing normal-like distribution of cumulative grade points.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: PANDAS GROUPBY & MERGING -->
+    <section class="tab-content" id="pane-pandas">
+      <div class="card-panel">
+        <div class="panel-header">
+          <h3>Interactive Pandas GroupBy Query Engine</h3>
+          <p style="color: var(--text-secondary); font-size: 0.88rem;">Select a grouping category and aggregation function to run dynamic server-side Pandas calculations.</p>
+        </div>
+
+        <div class="interactive-controls-row">
+          <label style="font-size: 0.85rem; font-weight: 600;">Group By:</label>
+          <select id="groupby-dim" class="form-select">
+            <option value="Department">Department</option>
+            <option value="Year">Academic Year</option>
+            <option value="Gender">Gender</option>
+            <option value="City">City</option>
+          </select>
+
+          <label style="font-size: 0.85rem; font-weight: 600;">Target Metric:</label>
+          <select id="groupby-metric" class="form-select">
+            <option value="CGPA">CGPA</option>
+            <option value="AttendanceRate">Attendance Rate (%)</option>
+            <option value="StudyHoursPerWeek">Weekly Study Hours</option>
+            <option value="MathScore">Math Assessment Score</option>
+          </select>
+
+          <label style="font-size: 0.85rem; font-weight: 600;">Aggregation Function:</label>
+          <select id="groupby-agg" class="form-select">
+            <option value="mean">Mean (Average)</option>
+            <option value="max">Maximum</option>
+            <option value="min">Minimum</option>
+            <option value="std">Standard Deviation</option>
+          </select>
+
+          <button id="btn-run-groupby" class="btn-cyan">Compute GroupBy</button>
+        </div>
+
+        <div class="data-table-wrap">
+          <table class="data-table" id="groupby-table">
+            <thead>
+              <tr>
+                <th id="th-group-name">Department</th>
+                <th>Aggregated Value</th>
+                <th>Sample Count (N)</th>
+              </tr>
+            </thead>
+            <tbody id="groupby-tbody">
+              <!-- Injected via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Relational Merged Data View -->
+      <div class="card-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <div>
+            <h3 style="font-family: var(--font-heading); font-size: 1.15rem;">Relational Merging: Students &times; Course Enrollments (Inner Join)</h3>
+            <p style="color: var(--text-secondary); font-size: 0.85rem;">Demonstrates Pandas <code>pd.merge(df_students, df_enrollments, on='StudentID')</code> connecting student demographics with course grades.</p>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="form-select" id="btn-table-students" style="cursor: pointer;">Students</button>
+            <button class="form-select" id="btn-table-enrollments" style="cursor: pointer;">Enrollments</button>
+            <button class="form-select" id="btn-table-merged" style="cursor: pointer; background: var(--accent-cyan); color: #fff;">Merged</button>
+          </div>
+        </div>
+
+        <div class="data-table-wrap">
+          <table class="data-table" id="records-table">
+            <thead id="records-thead">
+              <!-- Dynamically populated -->
+            </thead>
+            <tbody id="records-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: NUMPY & OOP PLAYGROUND -->
+    <section class="tab-content" id="pane-numpy">
+      <div class="visualizer-layout" style="grid-template-columns: 1fr 1fr;">
+        <!-- Left: NumPy Vectorization & Broadcasting -->
+        <div class="card-panel">
+          <div class="panel-header">
+            <h3>⚡ NumPy Broadcasting: Z-Score Normalizer</h3>
+            <p style="color: var(--text-secondary); font-size: 0.85rem;">Compute standardized Z-scores: <code>Z = (X - &mu;) / &sigma;</code> using 2D array broadcasting across subject means.</p>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.25rem;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem;">
+              <div>
+                <label style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted);">Math Score</label>
+                <input type="number" id="calc-math" class="form-input" style="width: 100%; margin-top: 0.3rem;" value="88" min="0" max="100">
+              </div>
+              <div>
+                <label style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted);">Reading Score</label>
+                <input type="number" id="calc-reading" class="form-input" style="width: 100%; margin-top: 0.3rem;" value="85" min="0" max="100">
+              </div>
+              <div>
+                <label style="font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted);">Writing Score</label>
+                <input type="number" id="calc-writing" class="form-input" style="width: 100%; margin-top: 0.3rem;" value="92" min="0" max="100">
+              </div>
+            </div>
+
+            <button id="btn-calc-numpy" class="btn-cyan" style="align-self: flex-start;">Calculate with NumPy</button>
+          </div>
+
+          <div id="numpy-output-card" style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem;">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+        <!-- Right: Python OOP Evaluator -->
+        <div class="card-panel">
+          <div class="panel-header">
+            <h3>🐍 Python OOP: StudentRecord Class</h3>
+            <p style="color: var(--text-secondary); font-size: 0.85rem;">Demonstrates Python Object-Oriented principles: Encapsulation (<code>_cgpa</code> getter), computed properties, and methods.</p>
+          </div>
+
+          <div class="code-box">
+class StudentRecord:
+    def __init__(self, id, name, cgpa, attendance):
+        self.student_id = id
+        self.name = name
+        self._cgpa = float(cgpa)
+        self.attendance = float(attendance)
+
+    @property
+    def academic_standing(self):
+        if self._cgpa >= 9.0: return "Distinction"
+        if self._cgpa >= 8.0: return "First Class"
+        return "Second Class"
+
+    def is_eligible_for_placement(self):
+        return self._cgpa >= 8.0 and self.attendance >= 85.0
+          </div>
+
+          <div style="background: rgba(6, 182, 212, 0.08); border: 1px solid rgba(6, 182, 212, 0.25); border-radius: var(--radius-md); padding: 1.25rem;">
+            <h4 style="color: #38bdf8; margin-bottom: 0.5rem;">List & Dict Comprehensions:</h4>
+            <ul style="font-size: 0.85rem; color: var(--text-secondary); padding-left: 1.25rem; line-height: 1.7;">
+              <li><strong>List Comprehension:</strong> <code>[StudentRecord(...) for row in df.iterrows()]</code></li>
+              <li><strong>Dict Comprehension:</strong> <code>{s.id: s.is_eligible_for_placement() for s in students}</code></li>
+              <li><strong>Conditional Filter:</strong> <code>[s.name for s in students if s.academic_standing == "Distinction"]</code></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: JUPYTER NOTEBOOK HUB -->
+    <section class="tab-content" id="pane-notebook">
+      <div class="card-panel">
+        <div class="panel-header">
+          <h3>📓 Jupyter Notebook Reference</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">Complete walkthrough of Python essentials, NumPy, Pandas, and Data Visualization is saved in the repository notebook.</p>
+        </div>
+
+        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap;">
+          <span class="hero-pill">📁 File: <code>notebooks/week3_week4_python_numpy_pandas_viz.ipynb</code></span>
+          <span class="hero-pill">⚡ Kernel: Python 3.11</span>
+          <span class="hero-pill">📊 Plots: Matplotlib & Seaborn</span>
+        </div>
+
+        <h4 style="margin-bottom: 0.5rem; color: #38bdf8;">How to launch and interact with the notebook:</h4>
+        <div class="code-box">
+# Navigate to the week's directory
+cd "WEEK1 - WEEK2/WEEK3 - WEEK4"
+
+# Launch Jupyter Notebook or Jupyter Lab
+jupyter notebook notebooks/week3_week4_python_numpy_pandas_viz.ipynb
+
+# Alternatively run the standalone analysis pipeline:
+python analysis.py
+        </div>
+
+        <div style="margin-top: 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+          <div style="background: rgba(255, 255, 255, 0.02); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <h5 style="color: #60a5fa; margin-bottom: 0.35rem;">Part 1: Python OOP</h5>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">StudentRecord entity with encapsulation, property getters, and list/dict comprehensions.</p>
+          </div>
+          <div style="background: rgba(255, 255, 255, 0.02); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <h5 style="color: #34d399; margin-bottom: 0.35rem;">Part 2: NumPy Broadcasting</h5>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">2D matrices, vectorized column/row calculations, and Z-score normalization.</p>
+          </div>
+          <div style="background: rgba(255, 255, 255, 0.02); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <h5 style="color: #f59e0b; margin-bottom: 0.35rem;">Part 3: Pandas & Merging</h5>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Dataframe cleaning, inner join with course enrollments, and multi-metric GroupBy.</p>
+          </div>
+          <div style="background: rgba(255, 255, 255, 0.02); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <h5 style="color: #ec4899; margin-bottom: 0.35rem;">Part 4: Visualizations</h5>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Seaborn boxplots, KDE curves, OLS regression plots, and correlation heatmaps.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

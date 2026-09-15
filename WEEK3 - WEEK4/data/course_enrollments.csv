@@ -1,0 +1,84 @@
+StudentID,CourseCode,CourseName,Credits,Grade,GradePoints
+STU001,CS301,Design & Analysis of Algorithms,4,A,9
+STU001,MA301,Applied Linear Algebra & Calculus,4,C,5
+STU001,CS303,Operating Systems,3,A+,10
+STU001,CS305,Computer Networks,3,C,5
+STU001,CS304,Machine Learning Foundations,4,C,5
+STU002,CS301,Design & Analysis of Algorithms,4,A+,10
+STU002,CS305,Computer Networks,3,A,9
+STU002,CS304,Machine Learning Foundations,4,A,9
+STU002,MA301,Applied Linear Algebra & Calculus,4,C+,6
+STU002,CS303,Operating Systems,3,C+,6
+STU003,CS305,Computer Networks,3,A,9
+STU003,CS302,Database Management Systems,4,B,7
+STU003,CS304,Machine Learning Foundations,4,C+,6
+STU004,CS301,Design & Analysis of Algorithms,4,B+,8
+STU004,CS302,Database Management Systems,4,A,9
+STU004,CS304,Machine Learning Foundations,4,A,9
+STU004,CS305,Computer Networks,3,B+,8
+STU005,CS301,Design & Analysis of Algorithms,4,B+,8
+STU005,CS304,Machine Learning Foundations,4,B+,8
+STU005,MA301,Applied Linear Algebra & Calculus,4,C+,6
+STU006,CS301,Design & Analysis of Algorithms,4,A+,10
+STU006,CS304,Machine Learning Foundations,4,C+,6
+STU006,MA301,Applied Linear Algebra & Calculus,4,B+,8
+STU006,CS302,Database Management Systems,4,C,5
+STU007,CS303,Operating Systems,3,A+,10
+STU007,CS305,Computer Networks,3,C,5
+STU007,CS302,Database Management Systems,4,A,9
+STU007,MA301,Applied Linear Algebra & Calculus,4,B+,8
+STU007,CS301,Design & Analysis of Algorithms,4,A+,10
+STU008,CS301,Design & Analysis of Algorithms,4,B,7
+STU008,CS304,Machine Learning Foundations,4,C,5
+STU008,CS303,Operating Systems,3,B+,8
+STU009,CS303,Operating Systems,3,C,5
+STU009,MA301,Applied Linear Algebra & Calculus,4,B+,8
+STU009,CS302,Database Management Systems,4,C,5
+STU010,MA301,Applied Linear Algebra & Calculus,4,A,9
+STU010,CS301,Design & Analysis of Algorithms,4,B,7
+STU010,CS302,Database Management Systems,4,B,7
+STU010,CS303,Operating Systems,3,B+,8
+STU010,CS305,Computer Networks,3,C,5
+STU011,CS305,Computer Networks,3,A+,10
+STU011,CS302,Database Management Systems,4,B+,8
+STU011,CS303,Operating Systems,3,B,7
+STU011,CS301,Design & Analysis of Algorithms,4,B+,8
+STU011,CS304,Machine Learning Foundations,4,A+,10
+STU012,CS305,Computer Networks,3,C,5
+STU012,CS303,Operating Systems,3,B,7
+STU012,CS302,Database Management Systems,4,B,7
+STU013,CS304,Machine Learning Foundations,4,C,5
+STU013,CS302,Database Management Systems,4,C+,6
+STU013,CS303,Operating Systems,3,C+,6
+STU013,CS301,Design & Analysis of Algorithms,4,B+,8
+STU013,MA301,Applied Linear Algebra & Calculus,4,C,5
+STU014,CS304,Machine Learning Foundations,4,A,9
+STU014,CS305,Computer Networks,3,C+,6
+STU014,MA301,Applied Linear Algebra & Calculus,4,B,7
+STU014,CS302,Database Management Systems,4,A+,10
+STU014,CS301,Design & Analysis of Algorithms,4,A+,10
+STU015,CS302,Database Management Systems,4,C+,6
+STU015,MA301,Applied Linear Algebra & Calculus,4,A+,10
+STU015,CS304,Machine Learning Foundations,4,B,7
+STU016,CS305,Computer Networks,3,A+,10
+STU016,CS304,Machine Learning Foundations,4,C,5
+STU016,CS303,Operating Systems,3,C,5
+STU016,MA301,Applied Linear Algebra & Calculus,4,A+,10
+STU017,CS305,Computer Networks,3,B,7
+STU017,CS303,Operating Systems,3,A,9
+STU017,MA301,Applied Linear Algebra & Calculus,4,B,7
+STU017,CS301,Design & Analysis of Algorithms,4,A+,10
+STU017,CS302,Database Management Systems,4,C,5
+STU018,CS303,Operating Systems,3,C,5
+STU018,CS305,Computer Networks,3,B+,8
+STU018,CS302,Database Management Systems,4,C,5
+STU018,MA301,Applied Linear Algebra & Calculus,4,C+,6
+STU018,CS301,Design & Analysis of Algorithms,4,C+,6
+STU019,CS302,Database Management Systems,4,C+,6
+STU019,CS303,Operating Systems,3,C+,6
+STU019,MA301,Applied Linear Algebra & Calculus,4,A+,10
+STU020,CS303,Operating Systems,3,B+,8
+STU020,CS304,Machine Learning Foundations,4,A,9
+STU020,CS301,Design & Analysis of Algorithms,4,A+,10
+STU020,CS305,Computer Networks,3,A,9
+STU020,CS302,Database Management Systems,4,C+,6

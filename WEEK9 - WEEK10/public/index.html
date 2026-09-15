@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="End-to-End Scikit-Learn Pipeline & Clustering Studio for HACKOWEEK SEM 5.">
+  <title>ML Pipeline & Clustering Studio | Week 9 & 10 HACKOWEEK</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="header-container">
+      <a href="#" class="brand-wrapper">
+        <div class="brand-icon">🧬</div>
+        <div class="brand-text">
+          <h1>ML Pipeline & Clustering Studio</h1>
+          <span class="brand-badge">W9-W10: Pipelines &bull; ROC-AUC &bull; Clustering</span>
+        </div>
+      </a>
+
+      <nav class="nav-tabs" aria-label="Workflow Navigation">
+        <button class="nav-btn active" data-tab="pipeline">
+          <span>⚡</span> Scikit-Learn Pipeline
+        </button>
+        <button class="nav-btn" data-tab="evaluation">
+          <span>📈</span> ROC-AUC & Evaluation
+        </button>
+        <button class="nav-btn" data-tab="clustering">
+          <span>🧬</span> Unsupervised Clustering
+        </button>
+        <button class="nav-btn" data-tab="notebook">
+          <span>📓</span> Jupyter Notebook
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+      <h2>Complete Scikit-Learn Workflow & Clustering</h2>
+      <p>Culmination capstone studio for Week 9–10 of HACKOWEEK SEM 5. Implementing feature engineering pipelines, stratified cross-validation, ROC-AUC evaluation, and unsupervised clustering (K-Means, Hierarchical, DBSCAN) on the Kaggle Student Performance Dataset.</p>
+      <div class="hero-tags">
+        <span class="hero-pill">⚡ Scikit-Learn ColumnTransformer</span>
+        <span class="hero-pill">🎯 Cross-Validation & ROC-AUC Curve</span>
+        <span class="hero-pill">📊 Confusion Matrix & F1-Score</span>
+        <span class="hero-pill">🧬 K-Means & Hierarchical Clustering</span>
+        <span class="hero-pill">🌐 DBSCAN Density-Based Grouping</span>
+      </div>
+    </section>
+
+    <!-- TAB 1: SCIKIT-LEARN PIPELINE -->
+    <section class="tab-content active" id="pane-pipeline">
+      <div class="card-panel">
+        <div class="panel-header">
+          <h3><span>⚡</span> Production Machine Learning Pipeline Architecture</h3>
+          <p style="color: var(--text-secondary); font-size: 0.88rem;">Encapsulating preprocessing, scaling, encoding, and classification into a unified leak-proof Scikit-Learn pipeline.</p>
+        </div>
+
+        <!-- Pipeline Flow -->
+        <div class="pipeline-flow">
+          <div class="pipeline-step-card">
+            <div class="pipeline-step-name">1. Raw Input</div>
+            <p style="font-size: 0.8rem; color: var(--text-muted);">Numerical scores + Categorical gender/department</p>
+          </div>
+          <div class="pipeline-arrow">&rarr;</div>
+          <div class="pipeline-step-card">
+            <div class="pipeline-step-name">2. ColumnTransformer</div>
+            <p style="font-size: 0.8rem; color: var(--text-muted);">Median Imputer + StandardScaler &bull; OneHotEncoder</p>
+          </div>
+          <div class="pipeline-arrow">&rarr;</div>
+          <div class="pipeline-step-card">
+            <div class="pipeline-step-name">3. Estimator</div>
+            <p style="font-size: 0.8rem; color: var(--text-muted);">Logistic Regression (Distinction Standing Classifier)</p>
+          </div>
+        </div>
+
+        <div class="split-grid">
+          <div>
+            <h4 style="font-size: 0.95rem; margin-bottom: 0.5rem; color: #5eead4;">Test Set Performance Metrics (Hold-out Evaluation)</h4>
+            <div id="pipeline-test-metrics" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+
+          <div>
+            <h4 style="font-size: 0.95rem; margin-bottom: 0.5rem; color: #38bdf8;">Stratified 3-Fold Cross-Validation</h4>
+            <div id="pipeline-cv-metrics" style="background: rgba(255, 255, 255, 0.02); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: ROC-AUC & EVALUATION -->
+    <section class="tab-content" id="pane-evaluation">
+      <div class="split-grid">
+        <!-- Confusion Matrix Card -->
+        <div class="card-panel">
+          <div class="panel-header">
+            <h3><span>🗂️</span> Confusion Matrix Breakdown</h3>
+            <p style="color: var(--text-secondary); font-size: 0.85rem;">Detailed breakdown of True Positives, True Negatives, False Positives, and False Negatives.</p>
+          </div>
+
+          <div id="confusion-matrix-box" style="margin-top: 1rem;">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+        <!-- ROC-AUC Canvas -->
+        <div class="card-panel">
+          <div class="panel-header">
+            <h3><span>📈</span> ROC Curve (Receiver Operating Characteristic)</h3>
+            <p style="color: var(--text-secondary); font-size: 0.85rem;">True Positive Rate (Sensitivity) plotted against False Positive Rate (1 - Specificity).</p>
+          </div>
+
+          <div class="canvas-wrapper">
+            <canvas id="canvas-roc" width="340" height="220"></canvas>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.85rem;">
+            <span style="font-size: 0.85rem; color: var(--text-secondary);">Area Under Curve (AUC Score):</span>
+            <strong id="roc-auc-badge" style="color: #34d399; font-size: 1.2rem;">AUC = 1.000</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: UNSUPERVISED CLUSTERING -->
+    <section class="tab-content" id="pane-clustering">
+      <div class="card-panel">
+        <div class="panel-header">
+          <h3><span>🧬</span> Unsupervised Student Clustering Studio</h3>
+          <p style="color: var(--text-secondary); font-size: 0.88rem;">Discover natural student personas based on multi-dimensional performance metrics (Study Hours, Attendance, CGPA, Exam Marks) projected onto 2D PCA space.</p>
+        </div>
+
+        <div style="display: flex; gap: 1.5rem; align-items: flex-end; flex-wrap: wrap; margin-bottom: 1.5rem;">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" style="display: block; margin-bottom: 0.35rem; font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted);">Clustering Algorithm</label>
+            <select id="select-algo" class="form-select">
+              <option value="kmeans">K-Means Clustering</option>
+              <option value="hierarchical">Hierarchical (Agglomerative Ward)</option>
+              <option value="dbscan">DBSCAN (Density-Based)</option>
+            </select>
+          </div>
+
+          <div class="form-group" id="group-k" style="margin-bottom: 0;">
+            <label class="form-label" style="display: block; margin-bottom: 0.35rem; font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted);">Clusters (k)</label>
+            <input type="number" id="input-k" class="form-input" value="3" min="2" max="6" style="width: 100px;">
+          </div>
+
+          <div class="form-group" id="group-dbscan" style="margin-bottom: 0; display: none;">
+            <label class="form-label" style="display: block; margin-bottom: 0.35rem; font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted);">Epsilon (&epsilon;) & Min Samples</label>
+            <div style="display: flex; gap: 0.5rem;">
+              <input type="number" id="input-eps" class="form-input" value="1.8" step="0.1" style="width: 80px;" title="Epsilon">
+              <input type="number" id="input-min-samples" class="form-input" value="2" min="1" max="5" style="width: 70px;" title="Min Samples">
+            </div>
+          </div>
+
+          <button id="btn-run-clustering" class="btn-teal">Run Clustering</button>
+        </div>
+
+        <!-- 2D PCA Cluster Scatter Plot -->
+        <div class="split-grid">
+          <div class="canvas-wrapper">
+            <h4 style="font-size: 0.85rem; color: #5eead4; margin-bottom: 0.5rem;">2D PCA Projection of Discovered Clusters</h4>
+            <canvas id="canvas-clusters" width="380" height="260"></canvas>
+            <div id="cluster-legend" style="display: flex; gap: 1rem; margin-top: 0.75rem; font-size: 0.8rem;"></div>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <h4 style="font-size: 0.95rem; color: #38bdf8;">Cluster Quality & Validation:</h4>
+              <span id="silhouette-badge" class="hero-pill" style="color: #34d399;">Silhouette: 0.438</span>
+            </div>
+            <div id="cluster-profiles-container" class="cluster-profiles-grid">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: JUPYTER NOTEBOOK HUB -->
+    <section class="tab-content" id="pane-notebook">
+      <div class="card-panel">
+        <div class="panel-header">
+          <h3>📓 Jupyter Notebook Reference</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">The complete Scikit-Learn workflow, pipeline construction, cross-validation, and clustering code are documented in the notebook.</p>
+        </div>
+
+        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap;">
+          <span class="hero-pill">📁 File: <code>notebooks/week9_week10_ml_pipeline_clustering.ipynb</code></span>
+          <span class="hero-pill">⚡ Engine: Scikit-Learn Pipelines & Clustering</span>
+          <span class="hero-pill">🏁 Status: Capstone Complete</span>
+        </div>
+
+        <h4 style="margin-bottom: 0.5rem; color: #5eead4;">Run the Notebook Locally:</h4>
+        <div class="code-box">
+cd "WEEK1 - WEEK2/WEEK9 - WEEK10"
+jupyter notebook notebooks/week9_week10_ml_pipeline_clustering.ipynb
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

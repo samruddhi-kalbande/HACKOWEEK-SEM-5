@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mathematics for Machine Learning Explorer: Linear Algebra, Calculus, Eigenvalues, and Backpropagation Intuition for HACKOWEEK SEM 5.">
+  <title>Math for Machine Learning | Week 5 & 6 HACKOWEEK</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="header-container">
+      <a href="#" class="brand-wrapper">
+        <div class="brand-icon">📐</div>
+        <div class="brand-text">
+          <h1>Math for ML Explorer</h1>
+          <span class="brand-badge">W5-W6: Linear Algebra &bull; Calculus</span>
+        </div>
+      </a>
+
+      <nav class="nav-tabs" aria-label="Math Navigation">
+        <button class="nav-btn active" data-tab="linalg">
+          <span>⚡</span> Linear Algebra
+        </button>
+        <button class="nav-btn" data-tab="eigen">
+          <span>🧬</span> Eigenvalues & PCA
+        </button>
+        <button class="nav-btn" data-tab="calculus">
+          <span>📉</span> Gradient Descent
+        </button>
+        <button class="nav-btn" data-tab="chainrule">
+          <span>🔗</span> Chain Rule & Backprop
+        </button>
+        <button class="nav-btn" data-tab="notebook">
+          <span>📓</span> Jupyter Notebook
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+      <h2>Foundations of Machine Learning Mathematics</h2>
+      <p>Interactive exploratory lab for Week 5–6 of HACKOWEEK SEM 5. Visualizing vector transformations, dot products, covariance eigen-decomposition, and calculus gradients driving neural network training.</p>
+      <div class="hero-tags">
+        <span class="hero-pill">⚡ Vector Dot Product & Cosine Similarity</span>
+        <span class="hero-pill">📐 2D Matrix Transformations & Determinants</span>
+        <span class="hero-pill">🧬 Covariance Matrix & Eigenvalues (PCA)</span>
+        <span class="hero-pill">📉 Gradient Descent on Student Dataset</span>
+        <span class="hero-pill">🔗 Chain Rule Backpropagation Trace</span>
+      </div>
+    </section>
+
+    <!-- TAB 1: LINEAR ALGEBRA & TRANSFORMATIONS -->
+    <section class="tab-content active" id="pane-linalg">
+      <div class="split-grid">
+        <!-- Vector Dot Product & Similarity -->
+        <div class="card-panel">
+          <div class="panel-header">
+            <h3><span>⚡</span> Vector Operations & Dot Product</h3>
+            <p style="color: var(--text-secondary); font-size: 0.85rem;">Compute magnitude, dot product, and cosine similarity between feature vectors (e.g. comparing student assessment vectors).</p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div>
+              <div class="form-group">
+                <label class="form-label">Vector u (x, y)</label>
+                <div style="display: flex; gap: 0.5rem;">
+                  <input type="number" id="vec-u1" class="form-input" value="3" style="width: 50%;">
+                  <input type="number" id="vec-u2" class="form-input" value="4" style="width: 50%;">
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="form-group">
+                <label class="form-label">Vector v (x, y)</label>
+                <div style="display: flex; gap: 0.5rem;">
+                  <input type="number" id="vec-v1" class="form-input" value="1" style="width: 50%;">
+                  <input type="number" id="vec-v2" class="form-input" value="2" style="width: 50%;">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button id="btn-calc-vectors" class="btn-purple" style="margin-top: 0.5rem;">Calculate Vector Metrics</button>
+
+          <div id="vector-results-box" style="margin-top: 1.25rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem;">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+        <!-- 2D Matrix Transformation Canvas -->
+        <div class="card-panel">
+          <div class="panel-header">
+            <h3><span>📐</span> 2D Matrix Transformation Visualizer</h3>
+            <p style="color: var(--text-secondary); font-size: 0.85rem;">Transform the unit square in real-time by entering elements for matrix <code>A = [[a, b], [c, d]]</code>.</p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; max-width: 240px; margin-bottom: 1rem;">
+            <input type="number" id="mat-a" class="form-input" value="1.5" step="0.1" title="Element a">
+            <input type="number" id="mat-b" class="form-input" value="-0.5" step="0.1" title="Element b">
+            <input type="number" id="mat-c" class="form-input" value="0.5" step="0.1" title="Element c">
+            <input type="number" id="mat-d" class="form-input" value="1.2" step="0.1" title="Element d">
+          </div>
+
+          <div class="canvas-wrapper">
+            <canvas id="canvas-matrix" width="300" height="240"></canvas>
+          </div>
+
+          <div id="matrix-metrics-box" style="margin-top: 0.85rem; font-size: 0.85rem; color: var(--text-secondary);">
+            <!-- Determinant and scaling factor -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: EIGENVALUES & PCA -->
+    <section class="tab-content" id="pane-eigen">
+      <div class="card-panel">
+        <div class="panel-header">
+          <h3><span>🧬</span> Covariance Matrix Eigen-Decomposition & PCA</h3>
+          <p style="color: var(--text-secondary); font-size: 0.88rem;">Eigenvectors $\mathbf{v}$ satisfy $\Sigma \mathbf{v} = \lambda \mathbf{v}$. In student data, the primary eigenvector identifies the principal performance factor across Math, Reading, and Writing.</p>
+        </div>
+
+        <div class="split-grid">
+          <div>
+            <h4 style="font-size: 0.95rem; margin-bottom: 0.5rem; color: #d8b4fe;">1. Kaggle Student Covariance Matrix ($\Sigma$)</h4>
+            <div id="cov-matrix-display" class="math-box">
+              Loading covariance matrix...
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-secondary);">Computed over <code>[MathScore, ReadingScore, WritingScore]</code> across all student records.</p>
+          </div>
+
+          <div>
+            <h4 style="font-size: 0.95rem; margin-bottom: 0.5rem; color: #38bdf8;">2. Eigenvalues ($\lambda$) & Variance Explained</h4>
+            <div id="eigen-metrics-display">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.5rem; background: rgba(255, 255, 255, 0.02); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+          <h4 style="color: #34d399; margin-bottom: 0.4rem;">Machine Learning Takeaway (PCA Intuition):</h4>
+          <p style="font-size: 0.88rem; color: var(--text-secondary);">
+            Because the first eigenvalue accounts for over <strong>90%</strong> of the variance, a single composite dimension (PC1) can represent almost the entire academic standing of a student with minimal loss of information.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: CALCULUS & GRADIENT DESCENT -->
+    <section class="tab-content" id="pane-calculus">
+      <div class="card-panel">
+        <div class="panel-header">
+          <h3><span>📉</span> Gradient Descent Optimization Simulator</h3>
+          <p style="color: var(--text-secondary); font-size: 0.88rem;">Minimizing Mean Squared Error: $J(w, b) = \frac{1}{2m} \sum (\hat{y}_i - y_i)^2$ to learn the relationship between Study Hours and CGPA.</p>
+        </div>
+
+        <div style="display: flex; gap: 1.5rem; align-items: flex-end; flex-wrap: wrap; margin-bottom: 1.5rem;">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label">Learning Rate (&alpha;)</label>
+            <input type="number" id="gd-lr" class="form-input" value="0.05" step="0.01" min="0.001" max="1.0">
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label">Epochs (Iterations)</label>
+            <input type="number" id="gd-epochs" class="form-input" value="60" step="10" min="10" max="500">
+          </div>
+
+          <button id="btn-run-gd" class="btn-purple">Run Gradient Descent</button>
+        </div>
+
+        <div class="split-grid">
+          <div>
+            <div class="canvas-wrapper">
+              <h4 style="font-size: 0.88rem; color: #a855f7; margin-bottom: 0.5rem;">Loss Convergence Curve (MSE vs Epoch)</h4>
+              <canvas id="canvas-loss" width="340" height="200"></canvas>
+            </div>
+          </div>
+
+          <div>
+            <div class="metric-pill" style="margin-bottom: 0.75rem;">
+              <span class="form-label">Fitted Regression Equation</span>
+              <span id="gd-equation" class="metric-pill-val" style="font-size: 1.15rem; color: #34d399;">CGPA = 0.146 * StudyHours + 6.11</span>
+            </div>
+
+            <div class="metric-pill" style="margin-bottom: 0.75rem;">
+              <span class="form-label">Final Loss Value (MSE)</span>
+              <span id="gd-loss" class="metric-pill-val" style="color: #38bdf8;">--</span>
+            </div>
+
+            <div style="font-size: 0.85rem; color: var(--text-secondary); background: rgba(255, 255, 255, 0.02); padding: 0.75rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+              At each step, weights are updated via: <br>
+              <code>w := w - &alpha; &part;J/&part;w</code><br>
+              <code>b := b - &alpha; &part;J/&part;b</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: CHAIN RULE & BACKPROPAGATION -->
+    <section class="tab-content" id="pane-chainrule">
+      <div class="card-panel">
+        <div class="panel-header">
+          <h3><span>🔗</span> The Chain Rule & Neural Network Backpropagation</h3>
+          <p style="color: var(--text-secondary); font-size: 0.88rem;">How calculus enables deep neural networks to learn by propagating errors backwards through compound function derivatives.</p>
+        </div>
+
+        <div class="math-box">
+Computational Graph (Forward Pass):
+x ──[ W1, b1 ]──> z1 ──[ &sigma;(z1) ]──> a1 ──[ W2, b2 ]──> z2 ──[ &sigma;(z2) ]──> &ycirc; ──[ Loss: 1/2 (y - &ycirc;)&sup2; ]
+
+Backward Pass (Chain Rule):
+&part;L/&part;W2 = (&part;L/&part;&ycirc;) &bull; (&part;&ycirc;/&part;z2) &bull; (&part;z2/&part;W2)
+&part;L/&part;W1 = (&part;L/&part;&ycirc;) &bull; (&part;&ycirc;/&part;z2) &bull; (&part;z2/&part;a1) &bull; (&part;a1/&part;z1) &bull; (&part;z1/&part;W1)
+        </div>
+
+        <div class="split-grid">
+          <div>
+            <h4 style="font-size: 0.95rem; margin-bottom: 0.5rem; color: #d8b4fe;">Interactive Input & Weights</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem;">
+              <div class="form-group"><label class="form-label">Input x</label><input type="number" id="cr-x" class="form-input" value="2.5" step="0.1"></div>
+              <div class="form-group"><label class="form-label">Target y</label><input type="number" id="cr-target" class="form-input" value="1.0" step="0.1"></div>
+              <div class="form-group"><label class="form-label">Weight W1</label><input type="number" id="cr-w1" class="form-input" value="0.6" step="0.1"></div>
+              <div class="form-group"><label class="form-label">Weight W2</label><input type="number" id="cr-w2" class="form-input" value="0.9" step="0.1"></div>
+            </div>
+            <button id="btn-calc-chainrule" class="btn-purple">Trace Backpropagation</button>
+          </div>
+
+          <div id="chainrule-results" style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: JUPYTER NOTEBOOK HUB -->
+    <section class="tab-content" id="pane-notebook">
+      <div class="card-panel">
+        <div class="panel-header">
+          <h3>📓 Jupyter Notebook Reference</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">The complete code and mathematical proofs are saved in the Week 5-6 Jupyter Notebook.</p>
+        </div>
+
+        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap;">
+          <span class="hero-pill">📁 File: <code>notebooks/week5_week6_linear_algebra_calculus.ipynb</code></span>
+          <span class="hero-pill">⚡ Engine: NumPy & SciPy</span>
+          <span class="hero-pill">🎯 Focus: ML Math Intuition</span>
+        </div>
+
+        <h4 style="margin-bottom: 0.5rem; color: #d8b4fe;">To open and execute the notebook:</h4>
+        <div class="math-box" style="color: #bae6fd;">
+cd "WEEK1 - WEEK2/WEEK5 - WEEK6"
+jupyter notebook notebooks/week5_week6_linear_algebra_calculus.ipynb
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

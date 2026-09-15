@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Supervised Machine Learning Studio: Regression & Classification Algorithms for HACKOWEEK SEM 5.">
+  <title>Supervised ML Studio | Week 7 & 8 HACKOWEEK</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="header-container">
+      <a href="#" class="brand-wrapper">
+        <div class="brand-icon">🤖</div>
+        <div class="brand-text">
+          <h1>Supervised ML Studio</h1>
+          <span class="brand-badge">W7-W8: Regression &bull; Classification</span>
+        </div>
+      </a>
+
+      <nav class="nav-tabs" aria-label="ML Navigation">
+        <button class="nav-btn active" data-tab="benchmarks">
+          <span>📊</span> Model Benchmarks
+        </button>
+        <button class="nav-btn" data-tab="predictor">
+          <span>🎯</span> Live Student Predictor
+        </button>
+        <button class="nav-btn" data-tab="tuning">
+          <span>🎛️</span> Hyperparameter Tuning
+        </button>
+        <button class="nav-btn" data-tab="notebook">
+          <span>📓</span> Jupyter Notebook
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+      <h2>Supervised Learning: Regression & Classification</h2>
+      <p>Interactive machine learning studio for Week 7–8 of HACKOWEEK SEM 5. Benchmarking and deploying Linear, Polynomial, Ridge, and Lasso Regression alongside Logistic Regression and K-Nearest Neighbors on the Kaggle Student Performance Dataset.</p>
+      <div class="hero-tags">
+        <span class="hero-pill">📈 Linear & Polynomial Regression</span>
+        <span class="hero-pill">🛡️ Regularized Ridge (L2) & Lasso (L1)</span>
+        <span class="hero-pill">🎯 Logistic Regression (Sigmoid)</span>
+        <span class="hero-pill">👥 K-Nearest Neighbors Classifier (KNN)</span>
+        <span class="hero-pill">📊 Scikit-Learn Pipeline</span>
+      </div>
+    </section>
+
+    <!-- TAB 1: MODEL BENCHMARKS -->
+    <section class="tab-content active" id="pane-benchmarks">
+      <!-- Regression Scorecards -->
+      <div class="card-panel">
+        <div class="panel-header">
+          <h3><span>📈</span> Regression Models (Continuous CGPA Prediction)</h3>
+          <p style="color: var(--text-secondary); font-size: 0.88rem;">Evaluating model fits on the student dataset using $R^2$ Score (Coefficient of Determination) and Mean Squared Error (MSE).</p>
+        </div>
+
+        <div class="grid-cards" id="regression-cards-container">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+      <!-- Classification Scorecards -->
+      <div class="card-panel">
+        <div class="panel-header">
+          <h3><span>🎯</span> Classification Models (High Academic Standing / Distinction)</h3>
+          <p style="color: var(--text-secondary); font-size: 0.88rem;">Binary classification predicting whether student achieves Distinction ($\text{CGPA} \ge 8.5$) based on attendance, study time, and exam marks.</p>
+        </div>
+
+        <div class="grid-cards" id="classification-cards-container">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: LIVE STUDENT PREDICTOR -->
+    <section class="tab-content" id="pane-predictor">
+      <div class="predictor-grid">
+        <!-- Input Form -->
+        <div class="card-panel">
+          <div class="panel-header">
+            <h3><span>🎚️</span> Candidate Student Profile Inputs</h3>
+            <p style="color: var(--text-secondary); font-size: 0.85rem;">Adjust parameters to test real-time inference across all 6 trained scikit-learn models.</p>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <span>Independent Weekly Study Hours</span>
+              <strong id="val-study">18.0 hrs/wk</strong>
+            </div>
+            <input type="range" id="input-study" class="slider-input" min="5" max="30" step="0.5" value="18">
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <span>Attendance Rate (%)</span>
+              <strong id="val-attendance">90.0%</strong>
+            </div>
+            <input type="range" id="input-attendance" class="slider-input" min="50" max="100" step="1" value="90">
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <span>Math Assessment Score</span>
+              <strong id="val-math">88 / 100</strong>
+            </div>
+            <input type="range" id="input-math" class="slider-input" min="40" max="100" step="1" value="88">
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <span>Reading Assessment Score</span>
+              <strong id="val-reading">86 / 100</strong>
+            </div>
+            <input type="range" id="input-reading" class="slider-input" min="40" max="100" step="1" value="86">
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <span>Writing Assessment Score</span>
+              <strong id="val-writing">90 / 100</strong>
+            </div>
+            <input type="range" id="input-writing" class="slider-input" min="40" max="100" step="1" value="90">
+          </div>
+
+          <button id="btn-predict" class="btn-emerald" style="width: 100%; margin-top: 0.5rem;">Generate ML Forecasts</button>
+        </div>
+
+        <!-- Prediction Outputs -->
+        <div class="card-panel">
+          <div class="panel-header">
+            <h3><span>✨</span> Instant Multi-Model Forecasts</h3>
+            <p style="color: var(--text-secondary); font-size: 0.85rem;">Outputs computed live using trained scikit-learn model artifacts.</p>
+          </div>
+
+          <div class="prediction-output-box">
+            <div>
+              <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Consensus Predicted CGPA (0 - 10 Scale)</span>
+              <div class="forecast-val" id="pred-consensus-cgpa">8.82</div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; font-size: 0.85rem;">
+              <div style="background: rgba(255, 255, 255, 0.03); padding: 0.6rem; border-radius: 6px;">
+                <span style="color: var(--text-muted);">Linear (OLS):</span> <strong id="pred-linear" style="color: #38bdf8;">--</strong>
+              </div>
+              <div style="background: rgba(255, 255, 255, 0.03); padding: 0.6rem; border-radius: 6px;">
+                <span style="color: var(--text-muted);">Polynomial (Deg 2):</span> <strong id="pred-poly" style="color: #a855f7;">--</strong>
+              </div>
+              <div style="background: rgba(255, 255, 255, 0.03); padding: 0.6rem; border-radius: 6px;">
+                <span style="color: var(--text-muted);">Ridge (L2):</span> <strong id="pred-ridge" style="color: #34d399;">--</strong>
+              </div>
+              <div style="background: rgba(255, 255, 255, 0.03); padding: 0.6rem; border-radius: 6px;">
+                <span style="color: var(--text-muted);">Lasso (L1):</span> <strong id="pred-lasso" style="color: #fbbf24;">--</strong>
+              </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid var(--border-color);">
+
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <span style="font-size: 0.82rem; font-weight: 600;">Distinction Standing Likelihood:</span>
+                <strong id="pred-prob-val" style="color: #34d399;">88.5%</strong>
+              </div>
+              <div style="height: 10px; background: rgba(255, 255, 255, 0.08); border-radius: 999px; overflow: hidden;">
+                <div id="pred-prob-bar" style="height: 100%; width: 88.5%; background: var(--gradient-emerald); transition: width 0.4s ease;"></div>
+              </div>
+              <div style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.4rem;">
+                Logistic Verdict: <strong id="pred-logistic-verdict" style="color: #34d399;">Distinction</strong> &bull; KNN (k=3) Verdict: <strong id="pred-knn-verdict" style="color: #34d399;">Distinction</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: HYPERPARAMETER TUNING -->
+    <section class="tab-content" id="pane-tuning">
+      <div class="card-panel">
+        <div class="panel-header">
+          <h3><span>🎛️</span> Hyperparameter Tuning Studio</h3>
+          <p style="color: var(--text-secondary); font-size: 0.88rem;">Observe the effect of regularization strength ($\alpha$) on coefficient shrinkage in Ridge/Lasso and neighbor count ($k$) on KNN decision boundaries.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+          <div>
+            <div class="slider-label-row">
+              <span>Ridge Penalty (&alpha; L2)</span>
+              <strong id="val-ridge-alpha">1.0</strong>
+            </div>
+            <input type="range" id="input-ridge-alpha" class="slider-input" min="0.1" max="10.0" step="0.1" value="1.0">
+          </div>
+
+          <div>
+            <div class="slider-label-row">
+              <span>Lasso Penalty (&alpha; L1)</span>
+              <strong id="val-lasso-alpha">0.05</strong>
+            </div>
+            <input type="range" id="input-lasso-alpha" class="slider-input" min="0.01" max="0.5" step="0.01" value="0.05">
+          </div>
+
+          <div>
+            <div class="slider-label-row">
+              <span>KNN Neighbors (k)</span>
+              <strong id="val-knn-k">3</strong>
+            </div>
+            <input type="range" id="input-knn-k" class="slider-input" min="1" max="9" step="2" value="3">
+          </div>
+        </div>
+
+        <div id="tuning-feedback-box" class="code-box">
+          Adjust the sliders above to tune model hyperparameters and re-benchmark in real time.
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: JUPYTER NOTEBOOK HUB -->
+    <section class="tab-content" id="pane-notebook">
+      <div class="card-panel">
+        <div class="panel-header">
+          <h3>📓 Jupyter Notebook Reference</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">The complete model implementations, mathematical explanations, and confusion matrices are documented in the notebook.</p>
+        </div>
+
+        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap;">
+          <span class="hero-pill">📁 File: <code>notebooks/week7_week8_regression_classification.ipynb</code></span>
+          <span class="hero-pill">⚡ Engine: Scikit-Learn 1.4+</span>
+          <span class="hero-pill">📊 Target: Multi-Model Evaluation</span>
+        </div>
+
+        <h4 style="margin-bottom: 0.5rem; color: #34d399;">Run the Notebook Locally:</h4>
+        <div class="code-box">
+cd "WEEK1 - WEEK2/WEEK7 - WEEK8"
+jupyter notebook notebooks/week7_week8_regression_classification.ipynb
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,667 @@
+[
+  {
+    "id": "STU001",
+    "name": "Aarav Sharma",
+    "gender": "Male",
+    "age": 20,
+    "city": "Pune",
+    "email": "aarav.sharma@college.edu",
+    "phone": "+91-9876543210",
+    "branch": "Computer Science",
+    "year": 2,
+    "semester": 4,
+    "cgpa": 8.72,
+    "attendance": 88.5,
+    "study_hours_weekly": 16.0,
+    "math_score": 89,
+    "reading_score": 85,
+    "writing_score": 88,
+    "skills": [
+      "Python",
+      "Flask",
+      "DSA",
+      "Machine Learning"
+    ],
+    "projects": [
+      "Sentiment Analyzer",
+      "Library Management System"
+    ],
+    "activities": [
+      "Competitive Coding",
+      "Tech Fest Organizer"
+    ],
+    "status": "Active"
+  },
+  {
+    "id": "STU002",
+    "name": "Priya Deshmukh",
+    "gender": "Female",
+    "age": 21,
+    "city": "Mumbai",
+    "email": "priya.deshmukh@college.edu",
+    "phone": "+91-9876543211",
+    "branch": "Computer Science",
+    "year": 3,
+    "semester": 5,
+    "cgpa": 9.35,
+    "attendance": 94.0,
+    "study_hours_weekly": 22.0,
+    "math_score": 96,
+    "reading_score": 92,
+    "writing_score": 95,
+    "skills": [
+      "Node.js",
+      "Flask",
+      "REST APIs",
+      "React",
+      "PostgreSQL"
+    ],
+    "projects": [
+      "Student Portal REST API",
+      "E-Commerce Microservices"
+    ],
+    "activities": [
+      "Whiteboard Challenge Winner",
+      "Hackathon Lead"
+    ],
+    "status": "Active"
+  },
+  {
+    "id": "STU003",
+    "name": "Rohan Kulkarni",
+    "gender": "Male",
+    "age": 20,
+    "city": "Nagpur",
+    "email": "rohan.kulkarni@college.edu",
+    "phone": "+91-9876543212",
+    "branch": "Information Technology",
+    "year": 2,
+    "semester": 3,
+    "cgpa": 7.85,
+    "attendance": 79.0,
+    "study_hours_weekly": 12.5,
+    "math_score": 78,
+    "reading_score": 80,
+    "writing_score": 76,
+    "skills": [
+      "C++",
+      "Trees",
+      "Graphs",
+      "Dynamic Programming"
+    ],
+    "projects": [
+      "Graph Visualizer",
+      "Shortest Path Router"
+    ],
+    "activities": [
+      "LeetCode 100 Days",
+      "Coding Club Member"
+    ],
+    "status": "Active"
+  },
+  {
+    "id": "STU004",
+    "name": "Sneha Patil",
+    "gender": "Female",
+    "age": 21,
+    "city": "Nashik",
+    "email": "sneha.patil@college.edu",
+    "phone": "+91-9876543213",
+    "branch": "Electronics",
+    "year": 3,
+    "semester": 6,
+    "cgpa": 8.42,
+    "attendance": 91.0,
+    "study_hours_weekly": 15.0,
+    "math_score": 85,
+    "reading_score": 84,
+    "writing_score": 82,
+    "skills": [
+      "Python",
+      "Flask",
+      "IoT",
+      "Embedded C",
+      "Raspberry Pi"
+    ],
+    "projects": [
+      "Smart Home Energy Monitor",
+      "IoT Weather Station"
+    ],
+    "activities": [
+      "Project Exhibition Finalist",
+      "Robotics Club"
+    ],
+    "status": "Active"
+  },
+  {
+    "id": "STU005",
+    "name": "Aditya Verma",
+    "gender": "Male",
+    "age": 22,
+    "city": "Bengaluru",
+    "email": "aditya.verma@college.edu",
+    "phone": "+91-9876543214",
+    "branch": "Computer Science",
+    "year": 4,
+    "semester": 7,
+    "cgpa": 9.1,
+    "attendance": 87.0,
+    "study_hours_weekly": 18.0,
+    "math_score": 92,
+    "reading_score": 90,
+    "writing_score": 91,
+    "skills": [
+      "Docker",
+      "Kubernetes",
+      "FastAPI",
+      "Go",
+      "AWS"
+    ],
+    "projects": [
+      "Cloud File Storage Engine",
+      "Distributed Cache"
+    ],
+    "activities": [
+      "Open Source Contributor",
+      "DevOps Workshop Lead"
+    ],
+    "status": "Active"
+  },
+  {
+    "id": "STU006",
+    "name": "Ananya Joshi",
+    "gender": "Female",
+    "age": 19,
+    "city": "Pune",
+    "email": "ananya.joshi@college.edu",
+    "phone": "+91-9876543215",
+    "branch": "Data Science",
+    "year": 1,
+    "semester": 2,
+    "cgpa": 8.9,
+    "attendance": 95.0,
+    "study_hours_weekly": 20.0,
+    "math_score": 94,
+    "reading_score": 88,
+    "writing_score": 87,
+    "skills": [
+      "Python",
+      "Pandas",
+      "NumPy",
+      "Matplotlib",
+      "SQL"
+    ],
+    "projects": [
+      "Customer Churn Predictor",
+      "COVID-19 Analytics Dashboard"
+    ],
+    "activities": [
+      "DataCamp Champion",
+      "Math Olympiad"
+    ],
+    "status": "Active"
+  },
+  {
+    "id": "STU007",
+    "name": "Vikram Singh",
+    "gender": "Male",
+    "age": 22,
+    "city": "Jaipur",
+    "email": "vikram.singh@college.edu",
+    "phone": "+91-9876543216",
+    "branch": "Mechanical",
+    "year": 4,
+    "semester": 8,
+    "cgpa": 7.3,
+    "attendance": 76.5,
+    "study_hours_weekly": 10.0,
+    "math_score": 75,
+    "reading_score": 72,
+    "writing_score": 70,
+    "skills": [
+      "AutoCAD",
+      "SolidWorks",
+      "ANSYS",
+      "Python Basics"
+    ],
+    "projects": [
+      "Electric Vehicle Chassis",
+      "Wind Turbine Blade Simulation"
+    ],
+    "activities": [
+      "Formula Student Racecar Team",
+      "Sports Secretary"
+    ],
+    "status": "Active"
+  },
+  {
+    "id": "STU008",
+    "name": "Kavya Nair",
+    "gender": "Female",
+    "age": 20,
+    "city": "Kochi",
+    "email": "kavya.nair@college.edu",
+    "phone": "+91-9876543217",
+    "branch": "Information Technology",
+    "year": 2,
+    "semester": 4,
+    "cgpa": 8.65,
+    "attendance": 89.0,
+    "study_hours_weekly": 14.5,
+    "math_score": 86,
+    "reading_score": 89,
+    "writing_score": 87,
+    "skills": [
+      "JavaScript",
+      "HTML/CSS",
+      "React",
+      "Node.js"
+    ],
+    "projects": [
+      "Campus Event Management Portal",
+      "Food Donation App"
+    ],
+    "activities": [
+      "Web Development Bootcamp",
+      "Literary Club Head"
+    ],
+    "status": "Active"
+  },
+  {
+    "id": "STU009",
+    "name": "Tanmay Bhatia",
+    "gender": "Male",
+    "age": 21,
+    "city": "Delhi",
+    "email": "tanmay.bhatia@college.edu",
+    "phone": "+91-9876543218",
+    "branch": "Computer Science",
+    "year": 3,
+    "semester": 5,
+    "cgpa": 6.85,
+    "attendance": 72.0,
+    "study_hours_weekly": 8.0,
+    "math_score": 68,
+    "reading_score": 71,
+    "writing_score": 67,
+    "skills": [
+      "Python",
+      "Flask",
+      "MySQL"
+    ],
+    "projects": [
+      "Online Bookstore REST API",
+      "Student Notes Hub"
+    ],
+    "activities": [
+      "Gaming Club President"
+    ],
+    "status": "Inactive"
+  },
+  {
+    "id": "STU010",
+    "name": "Ishita Roy",
+    "gender": "Female",
+    "age": 20,
+    "city": "Kolkata",
+    "email": "ishita.roy@college.edu",
+    "phone": "+91-9876543219",
+    "branch": "Data Science",
+    "year": 2,
+    "semester": 3,
+    "cgpa": 9.48,
+    "attendance": 96.0,
+    "study_hours_weekly": 24.0,
+    "math_score": 98,
+    "reading_score": 94,
+    "writing_score": 93,
+    "skills": [
+      "Python",
+      "R",
+      "PyTorch",
+      "TensorFlow",
+      "Scikit-Learn"
+    ],
+    "projects": [
+      "Skin Lesion Classification CNN",
+      "Stock Trend Forecaster"
+    ],
+    "activities": [
+      "Kaggle 2x Expert",
+      "AI Research Intern"
+    ],
+    "status": "Active"
+  },
+  {
+    "id": "STU011",
+    "name": "Siddharth Mehta",
+    "gender": "Male",
+    "age": 21,
+    "city": "Ahmedabad",
+    "email": "siddharth.m@college.edu",
+    "phone": "+91-9876543220",
+    "branch": "Civil",
+    "year": 3,
+    "semester": 6,
+    "cgpa": 7.6,
+    "attendance": 81.0,
+    "study_hours_weekly": 11.0,
+    "math_score": 79,
+    "reading_score": 75,
+    "writing_score": 74,
+    "skills": [
+      "Revit",
+      "ETABS",
+      "GIS",
+      "Python Scripting"
+    ],
+    "projects": [
+      "Smart City Traffic Model",
+      "Rainwater Harvesting Analysis"
+    ],
+    "activities": [
+      "NSS Volunteer Lead",
+      "Civil Engineering Conclave"
+    ],
+    "status": "Active"
+  },
+  {
+    "id": "STU012",
+    "name": "Riya Sen",
+    "gender": "Female",
+    "age": 19,
+    "city": "Hyderabad",
+    "email": "riya.sen@college.edu",
+    "phone": "+91-9876543221",
+    "branch": "Computer Science",
+    "year": 1,
+    "semester": 1,
+    "cgpa": 8.8,
+    "attendance": 93.0,
+    "study_hours_weekly": 17.0,
+    "math_score": 90,
+    "reading_score": 87,
+    "writing_score": 89,
+    "skills": [
+      "C",
+      "Python",
+      "Web Development",
+      "Git"
+    ],
+    "projects": [
+      "Personal Portfolio Website",
+      "CLI Task Manager"
+    ],
+    "activities": [
+      "Freshers Coding Hackathon 1st Place",
+      "Debate Society"
+    ],
+    "status": "Active"
+  },
+  {
+    "id": "STU013",
+    "name": "Karthik Raja",
+    "gender": "Male",
+    "age": 22,
+    "city": "Chennai",
+    "email": "karthik.raja@college.edu",
+    "phone": "+91-9876543222",
+    "branch": "Electronics",
+    "year": 4,
+    "semester": 7,
+    "cgpa": 8.15,
+    "attendance": 84.0,
+    "study_hours_weekly": 13.0,
+    "math_score": 83,
+    "reading_score": 81,
+    "writing_score": 80,
+    "skills": [
+      "VLSI",
+      "Verilog",
+      "MATLAB",
+      "Microcontrollers"
+    ],
+    "projects": [
+      "RISC-V 32-bit Core",
+      "Automated Irrigation System"
+    ],
+    "activities": [
+      "IEEE Student Branch Chair"
+    ],
+    "status": "Active"
+  },
+  {
+    "id": "STU014",
+    "name": "Meera Iyer",
+    "gender": "Female",
+    "age": 21,
+    "city": "Pune",
+    "email": "meera.iyer@college.edu",
+    "phone": "+91-9876543223",
+    "branch": "Information Technology",
+    "year": 3,
+    "semester": 5,
+    "cgpa": 9.05,
+    "attendance": 90.5,
+    "study_hours_weekly": 19.0,
+    "math_score": 91,
+    "reading_score": 93,
+    "writing_score": 92,
+    "skills": [
+      "Cybersecurity",
+      "Network Security",
+      "Python",
+      "Linux"
+    ],
+    "projects": [
+      "Network Intrusion Detection System",
+      "Vulnerability Scanner"
+    ],
+    "activities": [
+      "CTF Security Competitions",
+      "Women in Cyber Panel"
+    ],
+    "status": "Active"
+  },
+  {
+    "id": "STU015",
+    "name": "Arjun Reddy",
+    "gender": "Male",
+    "age": 20,
+    "city": "Hyderabad",
+    "email": "arjun.reddy@college.edu",
+    "phone": "+91-9876543224",
+    "branch": "Data Science",
+    "year": 2,
+    "semester": 4,
+    "cgpa": 8.2,
+    "attendance": 85.0,
+    "study_hours_weekly": 15.0,
+    "math_score": 84,
+    "reading_score": 82,
+    "writing_score": 81,
+    "skills": [
+      "SQL",
+      "Tableau",
+      "PowerBI",
+      "Python",
+      "Data Wrangling"
+    ],
+    "projects": [
+      "Retail Sales Forecast",
+      "Healthcare Patient Outcome Analysis"
+    ],
+    "activities": [
+      "Tableau Community Forum",
+      "Badminton College Team"
+    ],
+    "status": "Active"
+  },
+  {
+    "id": "STU016",
+    "name": "Diya Banerjee",
+    "gender": "Female",
+    "age": 22,
+    "city": "Kolkata",
+    "email": "diya.b@college.edu",
+    "phone": "+91-9876543225",
+    "branch": "Computer Science",
+    "year": 4,
+    "semester": 8,
+    "cgpa": 9.55,
+    "attendance": 97.0,
+    "study_hours_weekly": 25.0,
+    "math_score": 99,
+    "reading_score": 96,
+    "writing_score": 97,
+    "skills": [
+      "Algorithms",
+      "Distributed Systems",
+      "Rust",
+      "C++",
+      "Kafka"
+    ],
+    "projects": [
+      "Distributed Key-Value Store",
+      "Raft Consensus Implementation"
+    ],
+    "activities": [
+      "ACM ICPC Regionalist",
+      "University Gold Medalist Candidate"
+    ],
+    "status": "Active"
+  },
+  {
+    "id": "STU017",
+    "name": "Nikhil Agarwal",
+    "gender": "Male",
+    "age": 20,
+    "city": "Indore",
+    "email": "nikhil.agarwal@college.edu",
+    "phone": "+91-9876543226",
+    "branch": "Mechanical",
+    "year": 2,
+    "semester": 3,
+    "cgpa": 7.45,
+    "attendance": 80.0,
+    "study_hours_weekly": 11.5,
+    "math_score": 76,
+    "reading_score": 73,
+    "writing_score": 72,
+    "skills": [
+      "Thermodynamics",
+      "Matlab",
+      "Python",
+      "Fusion 360"
+    ],
+    "projects": [
+      "Solar Powered Stirling Engine",
+      "HVAC Heat Exchanger"
+    ],
+    "activities": [
+      "SAE Baja Member",
+      "Photography Club"
+    ],
+    "status": "Active"
+  },
+  {
+    "id": "STU018",
+    "name": "Pooja Hegde",
+    "gender": "Female",
+    "age": 21,
+    "city": "Mangalore",
+    "email": "pooja.hegde@college.edu",
+    "phone": "+91-9876543227",
+    "branch": "Computer Science",
+    "year": 3,
+    "semester": 6,
+    "cgpa": 8.78,
+    "attendance": 92.5,
+    "study_hours_weekly": 17.5,
+    "math_score": 89,
+    "reading_score": 90,
+    "writing_score": 88,
+    "skills": [
+      "Full Stack",
+      "MongoDB",
+      "Express",
+      "React",
+      "Node.js"
+    ],
+    "projects": [
+      "Peer Tutoring Platform",
+      "Mental Wellness Chatbot"
+    ],
+    "activities": [
+      "Google Developer Student Club Co-Lead",
+      "Dance Troupe"
+    ],
+    "status": "Active"
+  },
+  {
+    "id": "STU019",
+    "name": "Varun Kapoor",
+    "gender": "Male",
+    "age": 19,
+    "city": "Chandigarh",
+    "email": "varun.kapoor@college.edu",
+    "phone": "+91-9876543228",
+    "branch": "Information Technology",
+    "year": 1,
+    "semester": 2,
+    "cgpa": 8.12,
+    "attendance": 86.0,
+    "study_hours_weekly": 13.0,
+    "math_score": 82,
+    "reading_score": 83,
+    "writing_score": 80,
+    "skills": [
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "Python"
+    ],
+    "projects": [
+      "Campus Map Navigator",
+      "Quiz Web App"
+    ],
+    "activities": [
+      "Music Society Guitarist",
+      "Hackathon Participant"
+    ],
+    "status": "Active"
+  },
+  {
+    "id": "STU020",
+    "name": "Simran Kaur",
+    "gender": "Female",
+    "age": 21,
+    "city": "Amritsar",
+    "email": "simran.kaur@college.edu",
+    "phone": "+91-9876543229",
+    "branch": "Electronics",
+    "year": 3,
+    "semester": 5,
+    "cgpa": 7.95,
+    "attendance": 83.5,
+    "study_hours_weekly": 14.0,
+    "math_score": 80,
+    "reading_score": 82,
+    "writing_score": 79,
+    "skills": [
+      "Signal Processing",
+      "MATLAB",
+      "Arduino",
+      "Python"
+    ],
+    "projects": [
+      "ECG Signal Filter and Heart Rate Monitor",
+      "Audio Equalizer"
+    ],
+    "activities": [
+      "Technical Paper Presentation Winner",
+      "Rotaract Club"
+    ],
+    "status": "Active"
+  }
+]

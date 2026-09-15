@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Student Information Management System (SIMS) REST API and Analytics Dashboard powered by Flask and Kaggle Student Performance Dataset.">
+  <meta name="author" content="Samruddhi Kalbande">
+  <title>SIMS - Student Information Management System | HACKOWEEK</title>
+
+  <!-- Google Fonts: Outfit & Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Top App Navigation Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <a href="#" class="brand-wrapper" id="brand-logo-link">
+        <div class="brand-icon">🎓</div>
+        <div class="brand-text">
+          <h1>SIMS Portal</h1>
+          <span class="brand-badge">W1-W2: REST API</span>
+        </div>
+      </a>
+
+      <!-- Navigation Tabs -->
+      <nav class="nav-tabs" aria-label="Main Navigation">
+        <button class="nav-btn active" id="tab-btn-dashboard" data-tab="dashboard">
+          <span>📊</span> Dashboard
+        </button>
+        <button class="nav-btn" id="tab-btn-directory" data-tab="directory">
+          <span>👥</span> Student Directory
+        </button>
+        <button class="nav-btn" id="tab-btn-api" data-tab="api">
+          <span>⚡</span> REST API Explorer
+        </button>
+        <button class="nav-btn" id="tab-btn-whiteboard" data-tab="whiteboard">
+          <span>📝</span> Whiteboard Challenge
+        </button>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="header-actions">
+        <button class="btn-secondary" id="btn-refresh-data" title="Refresh all records from API">
+          <span>🔄</span> Refresh
+        </button>
+        <button class="btn-primary" id="btn-open-add-modal">
+          <span>➕</span> Add Student
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-wrapper">
+
+    <!-- Hero / Context Banner -->
+    <section class="hero-banner" aria-label="Project Information">
+      <div class="hero-info">
+        <h2>Student Information Management System (SIMS)</h2>
+        <p>A high-performance RESTful API and responsive client interface built for Week 1–2 of HACKOWEEK. Built on Flask and backed by the curated <strong>Kaggle Student Performance & Academic Insights Dataset</strong>, ready for multi-week algorithmic and ML integration.</p>
+        <div class="hero-tags">
+          <span class="hero-pill live-dot">Flask REST API: Active</span>
+          <span class="hero-pill">📁 Kaggle Dataset (CSV & JSON)</span>
+          <span class="hero-pill">🏷️ Endpoints: GET / POST / PUT / DELETE</span>
+          <span class="hero-pill">🎯 Activity: Whiteboard Challenge</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Global Key Statistics Grid -->
+    <section class="stats-grid" id="stats-summary-grid" aria-label="Key Performance Indicators">
+      <div class="stat-card">
+        <div class="stat-header">
+          <span class="stat-title">Total Students</span>
+          <div class="stat-icon-wrapper indigo">👥</div>
+        </div>
+        <div class="stat-value" id="stat-total-students">--</div>
+        <div class="stat-subtitle" id="stat-total-sub">Active & enrolled records</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-header">
+          <span class="stat-title">Average CGPA</span>
+          <div class="stat-icon-wrapper cyan">⭐</div>
+        </div>
+        <div class="stat-value" id="stat-avg-cgpa">--</div>
+        <div class="stat-subtitle" id="stat-cgpa-sub">Out of 10.0 scale</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-header">
+          <span class="stat-title">Avg Attendance</span>
+          <div class="stat-icon-wrapper emerald">📅</div>
+        </div>
+        <div class="stat-value" id="stat-avg-attendance">--</div>
+        <div class="stat-subtitle" id="stat-attendance-sub">Class & laboratory presence</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-header">
+          <span class="stat-title">Top Academic Rank</span>
+          <div class="stat-icon-wrapper amber">🏆</div>
+        </div>
+        <div class="stat-value" id="stat-top-student">--</div>
+        <div class="stat-subtitle" id="stat-top-sub">Highest cumulative score</div>
+      </div>
+    </section>
+
+    <!-- TAB 1: DASHBOARD & ANALYTICS -->
+    <section class="tab-content active" id="pane-dashboard" aria-label="Dashboard Overview">
+      <div class="analytics-grid">
+        <!-- Branch Distribution -->
+        <div class="analytics-card">
+          <h3><span>🏛️</span> Department / Branch Distribution</h3>
+          <div id="chart-branch-distribution">
+            <!-- Dynamic rows populated via JS -->
+          </div>
+        </div>
+
+        <!-- CGPA Distribution -->
+        <div class="analytics-card">
+          <h3><span>📈</span> Academic Performance (CGPA Tiers)</h3>
+          <div id="chart-cgpa-distribution">
+            <!-- Dynamic rows populated via JS -->
+          </div>
+        </div>
+
+        <!-- Year Distribution -->
+        <div class="analytics-card">
+          <h3><span>🎓</span> Academic Year Representation</h3>
+          <div id="chart-year-distribution">
+            <!-- Dynamic rows populated via JS -->
+          </div>
+        </div>
+
+        <!-- Gender Breakdown & Study Stats -->
+        <div class="analytics-card">
+          <h3><span>🔍</span> Academic Insights & Demographics</h3>
+          <div id="chart-insights-summary">
+            <!-- Dynamic breakdown populated via JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: STUDENT DIRECTORY -->
+    <section class="tab-content" id="pane-directory" aria-label="Student Directory">
+      <!-- Filter Bar -->
+      <div class="filter-bar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="input-search" class="search-input" placeholder="Search by name, ID, email, skills, or city...">
+        </div>
+
+        <div class="filter-group">
+          <select id="select-branch" class="filter-select" aria-label="Filter by Branch">
+            <option value="">All Branches</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Information Technology">Information Technology</option>
+            <option value="Data Science">Data Science</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Mechanical">Mechanical</option>
+            <option value="Civil">Civil</option>
+          </select>
+
+          <select id="select-year" class="filter-select" aria-label="Filter by Year">
+            <option value="">All Years</option>
+            <option value="1">Year 1</option>
+            <option value="2">Year 2</option>
+            <option value="3">Year 3</option>
+            <option value="4">Year 4</option>
+          </select>
+
+          <select id="select-status" class="filter-select" aria-label="Filter by Status">
+            <option value="">All Statuses</option>
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+
+          <select id="select-sort" class="filter-select" aria-label="Sort Order">
+            <option value="id-asc">Sort: ID (Asc)</option>
+            <option value="cgpa-desc">Sort: CGPA (High to Low)</option>
+            <option value="cgpa-asc">Sort: CGPA (Low to High)</option>
+            <option value="attendance-desc">Sort: Attendance (High to Low)</option>
+            <option value="name-asc">Sort: Name (A-Z)</option>
+          </select>
+
+          <button id="btn-reset-filters" class="btn-secondary" title="Reset all filters">
+            Reset
+          </button>
+        </div>
+      </div>
+
+      <!-- Directory Cards Grid -->
+      <div class="students-container" id="students-grid-container">
+        <!-- Student cards injected via JS -->
+      </div>
+    </section>
+
+    <!-- TAB 3: REST API EXPLORER -->
+    <section class="tab-content" id="pane-api" aria-label="REST API Explorer">
+      <div class="api-explorer-container">
+        <!-- Left: Endpoints Selector -->
+        <div class="endpoints-list">
+          <h3 style="font-family: var(--font-heading); margin-bottom: 0.5rem;">API Endpoints Specification</h3>
+          <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 1rem;">Click an endpoint to load its configuration into the live interactive tester.</p>
+
+          <div class="endpoint-card active" data-method="GET" data-url="/api/students" data-desc="Retrieve list of all students with optional search, filtering, and sorting query parameters.">
+            <div class="endpoint-header">
+              <span class="method-badge get">GET</span>
+              <span class="endpoint-path">/api/students</span>
+            </div>
+            <p class="endpoint-desc">List students with filtering by branch, year, status, min_cgpa, and full-text search.</p>
+          </div>
+
+          <div class="endpoint-card" data-method="GET" data-url="/api/students/STU001" data-desc="Fetch complete student profile details by unique student ID.">
+            <div class="endpoint-header">
+              <span class="method-badge get">GET</span>
+              <span class="endpoint-path">/api/students/:id</span>
+            </div>
+            <p class="endpoint-desc">Get specific student information by ID (e.g. STU001).</p>
+          </div>
+
+          <div class="endpoint-card" data-method="POST" data-url="/api/students" data-desc="Create a new student entry with validation." data-body='{\n  "name": "Kunal Deshmukh",\n  "email": "kunal.d@college.edu",\n  "branch": "Computer Science",\n  "year": 3,\n  "cgpa": 8.85,\n  "attendance": 91.0,\n  "city": "Nagpur",\n  "skills": ["Python", "Flask", "Docker"]\n}'>
+            <div class="endpoint-header">
+              <span class="method-badge post">POST</span>
+              <span class="endpoint-path">/api/students</span>
+            </div>
+            <p class="endpoint-desc">Insert a new student into the Kaggle database collection.</p>
+          </div>
+
+          <div class="endpoint-card" data-method="PUT" data-url="/api/students/STU001" data-desc="Update student information." data-body='{\n  "cgpa": 9.15,\n  "attendance": 92.5,\n  "status": "Active"\n}'>
+            <div class="endpoint-header">
+              <span class="method-badge put">PUT</span>
+              <span class="endpoint-path">/api/students/:id</span>
+            </div>
+            <p class="endpoint-desc">Update properties (e.g. CGPA, attendance, status) of an existing record.</p>
+          </div>
+
+          <div class="endpoint-card" data-method="DELETE" data-url="/api/students/STU020" data-desc="Remove a student record permanently.">
+            <div class="endpoint-header">
+              <span class="method-badge delete">DELETE</span>
+              <span class="endpoint-path">/api/students/:id</span>
+            </div>
+            <p class="endpoint-desc">Delete a student from the database by ID.</p>
+          </div>
+
+          <div class="endpoint-card" data-method="GET" data-url="/api/stats" data-desc="Compute dynamic statistical metrics from active records.">
+            <div class="endpoint-header">
+              <span class="method-badge get">GET</span>
+              <span class="endpoint-path">/api/stats</span>
+            </div>
+            <p class="endpoint-desc">Get computed metrics, distributions, and top performer analytics.</p>
+          </div>
+
+          <div class="endpoint-card" data-method="GET" data-url="/api/dataset-info" data-desc="Inspect the Kaggle dataset metadata and multi-week roadmap.">
+            <div class="endpoint-header">
+              <span class="method-badge get">GET</span>
+              <span class="endpoint-path">/api/dataset-info</span>
+            </div>
+            <p class="endpoint-desc">View dataset provenance, feature list, and multi-week roadmap.</p>
+          </div>
+        </div>
+
+        <!-- Right: Live Request & Response Tester -->
+        <div class="api-tester-pane">
+          <div class="tester-title">
+            <span>Live Request Console</span>
+            <span id="tester-status-badge" class="hero-pill">Ready</span>
+          </div>
+
+          <div class="tester-url-bar">
+            <select id="tester-method" class="filter-select" style="width: 110px; font-weight: 700;">
+              <option value="GET">GET</option>
+              <option value="POST">POST</option>
+              <option value="PUT">PUT</option>
+              <option value="DELETE">DELETE</option>
+            </select>
+            <input type="text" id="tester-url" class="tester-input" value="/api/students">
+            <button id="tester-btn-send" class="btn-primary">Send</button>
+          </div>
+
+          <div class="tester-body-area" id="tester-body-container" style="display: none;">
+            <label class="form-label">Request JSON Payload:</label>
+            <textarea id="tester-payload-body" placeholder="Enter JSON payload here..."></textarea>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <label class="form-label">Response JSON:</label>
+              <span id="tester-response-time" style="font-size: 0.75rem; color: var(--text-muted);">0 ms</span>
+            </div>
+            <pre class="response-viewer" id="tester-response-output">// Press 'Send' to dispatch request to Flask REST API...</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: WHITEBOARD CHALLENGE -->
+    <section class="tab-content" id="pane-whiteboard" aria-label="Whiteboard Challenge">
+      <div class="whiteboard-container">
+        <!-- Introduction Card -->
+        <div class="wb-card">
+          <h3><span>💡</span> Week 1 - Week 2 Activity: Whiteboard Challenge</h3>
+          <p>The Whiteboard Challenge is designed for third-year engineering students to simulate technical interviews and demonstrate core mastery of <strong>REST API Architecture</strong>, <strong>HTTP Request-Response Lifecycle</strong>, <strong>Data Modeling</strong>, and <strong>System Scalability</strong>.</p>
+          
+          <div class="wb-diagram">
++-----------------------------------------------------------------------------------+
+|                        REST API CLIENT - SERVER ARCHITECTURE                     |
++-----------------------------------------------------------------------------------+
+|                                                                                   |
+|  [ Frontend Client ]                                      [ Flask REST API ]      |
+|  - Web Browser / App                                      - app.py Server         |
+|  - Interactive SIMS UI                                    - Route Handlers        |
+|          |                                                       |                |
+|          | --- 1. HTTP Request (GET, POST, PUT, DELETE) -------> |                |
+|          |    Headers: Content-Type: application/json            |                |
+|          |    Path Params: /api/students/:id                     |                |
+|          |    Query Params: ?branch=CS&year=3                    |                |
+|          |                                                       v                |
+|          |                                              [ Data Access Layer ]     |
+|          |                                              - Kaggle CSV Dataset      |
+|          |                                              - students.json Store     |
+|          |                                                       |                |
+|          | <--- 2. HTTP Response (Status: 200, 201, 404, 400) -- |                |
+|          |    Payload: { "success": true, "students": [...] }    |                |
+|                                                                                   |
++-----------------------------------------------------------------------------------+
+          </div>
+        </div>
+
+        <!-- 6 Core REST Constraints -->
+        <div class="wb-card">
+          <h3><span>📐</span> The 6 Guiding Architectural Constraints of REST</h3>
+          <div class="wb-principles-grid">
+            <div class="wb-principle-item">
+              <h4>1. Client-Server Separation</h4>
+              <p>User interface concerns are decoupled from data storage concerns, improving portability of user interfaces across mobile and web.</p>
+            </div>
+            <div class="wb-principle-item">
+              <h4>2. Statelessness</h4>
+              <p>Each request from client to server contains all context needed to satisfy the request. No session state is retained on the server.</p>
+            </div>
+            <div class="wb-principle-item">
+              <h4>3. Cacheability</h4>
+              <p>Responses must implicitly or explicitly define themselves as cacheable or non-cacheable to prevent clients from reusing stale data.</p>
+            </div>
+            <div class="wb-principle-item">
+              <h4>4. Uniform Interface</h4>
+              <p>Standardized URIs for resources (e.g. <code>/api/students</code>) with standard HTTP verbs (<code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code>).</p>
+            </div>
+            <div class="wb-principle-item">
+              <h4>5. Layered System</h4>
+              <p>Client cannot ordinarily tell whether it is connected directly to the end server, or to an intermediary such as a proxy or load balancer.</p>
+            </div>
+            <div class="wb-principle-item">
+              <h4>6. Code on Demand (Optional)</h4>
+              <p>Servers are able to temporarily extend or customize the functionality of a client by transferring executable code (e.g. JavaScript).</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Common Whiteboard Questions & Solutions -->
+        <div class="wb-card">
+          <h3><span>🎯</span> Frequently Asked Whiteboard Interview Challenges</h3>
+          <div class="wb-principles-grid">
+            <div class="wb-principle-item">
+              <h4>Q1: PUT vs POST vs PATCH</h4>
+              <p><strong>POST</strong> creates a subordinate resource (ID generated by server).<br><strong>PUT</strong> replaces the entire resource or creates it at a known URI.<br><strong>PATCH</strong> applies partial modifications to a resource.</p>
+            </div>
+            <div class="wb-principle-item">
+              <h4>Q2: Idempotency in HTTP Methods</h4>
+              <p><code>GET</code>, <code>PUT</code>, <code>DELETE</code>, <code>HEAD</code> are <em>idempotent</em> (making identical requests multiple times produces the same system state). <code>POST</code> is <em>non-idempotent</em>.</p>
+            </div>
+            <div class="wb-principle-item">
+              <h4>Q3: Proper HTTP Status Code Usage</h4>
+              <p><code>200 OK</code>: Successful query/update.<br><code>201 Created</code>: Successful creation via POST.<br><code>400 Bad Request</code>: Malformed payload / missing field.<br><code>404 Not Found</code>: Resource does not exist.<br><code>409 Conflict</code>: Duplicate email or unique key.</p>
+            </div>
+            <div class="wb-principle-item">
+              <h4>Q4: How do you handle pagination at scale?</h4>
+              <p>Using <code>limit</code> and <code>page</code> (or cursor-based pagination with <code>last_seen_id</code>) prevents loading millions of records into memory at once, reducing latency and DB load.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: ADD STUDENT -->
+  <div class="modal-backdrop" id="modal-add-student">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Add New Student</h3>
+        <button class="modal-close-btn" data-close="modal-add-student">&times;</button>
+      </div>
+      <form id="form-add-student">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="add-name">Full Name *</label>
+            <input type="text" id="add-name" class="form-control" required placeholder="e.g. Riya Deshmukh">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="add-email">Email Address *</label>
+            <input type="email" id="add-email" class="form-control" required placeholder="riya@college.edu">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="add-branch">Department / Branch *</label>
+            <select id="add-branch" class="form-control" required>
+              <option value="Computer Science">Computer Science</option>
+              <option value="Information Technology">Information Technology</option>
+              <option value="Data Science">Data Science</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Mechanical">Mechanical</option>
+              <option value="Civil">Civil</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="add-year">Year (1 - 4) *</label>
+            <select id="add-year" class="form-control" required>
+              <option value="1">Year 1</option>
+              <option value="2">Year 2</option>
+              <option value="3" selected>Year 3</option>
+              <option value="4">Year 4</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="add-cgpa">CGPA (0.0 - 10.0) *</label>
+            <input type="number" id="add-cgpa" class="form-control" step="0.01" min="0" max="10" required placeholder="8.50">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="add-attendance">Attendance (%)</label>
+            <input type="number" id="add-attendance" class="form-control" step="0.1" min="0" max="100" value="85.0">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="add-city">City</label>
+            <input type="text" id="add-city" class="form-control" placeholder="Pune">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="add-gender">Gender</label>
+            <select id="add-gender" class="form-control">
+              <option value="Female">Female</option>
+              <option value="Male">Male</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group full-width">
+            <label class="form-label" for="add-skills">Skills (comma-separated)</label>
+            <input type="text" id="add-skills" class="form-control" placeholder="Python, REST APIs, Flask, React">
+          </div>
+          <div class="form-group full-width">
+            <label class="form-label" for="add-projects">Projects (comma-separated)</label>
+            <input type="text" id="add-projects" class="form-control" placeholder="Student Management Portal, Smart Weather Station">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" data-close="modal-add-student">Cancel</button>
+          <button type="submit" class="btn-primary">Save Student</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: EDIT STUDENT -->
+  <div class="modal-backdrop" id="modal-edit-student">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Edit Student Record</h3>
+        <button class="modal-close-btn" data-close="modal-edit-student">&times;</button>
+      </div>
+      <form id="form-edit-student">
+        <input type="hidden" id="edit-id">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="edit-name">Full Name</label>
+            <input type="text" id="edit-name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="edit-email">Email Address</label>
+            <input type="email" id="edit-email" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="edit-branch">Department / Branch</label>
+            <select id="edit-branch" class="form-control" required>
+              <option value="Computer Science">Computer Science</option>
+              <option value="Information Technology">Information Technology</option>
+              <option value="Data Science">Data Science</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Mechanical">Mechanical</option>
+              <option value="Civil">Civil</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="edit-year">Year</label>
+            <select id="edit-year" class="form-control" required>
+              <option value="1">Year 1</option>
+              <option value="2">Year 2</option>
+              <option value="3">Year 3</option>
+              <option value="4">Year 4</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="edit-cgpa">CGPA</label>
+            <input type="number" id="edit-cgpa" class="form-control" step="0.01" min="0" max="10" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="edit-attendance">Attendance (%)</label>
+            <input type="number" id="edit-attendance" class="form-control" step="0.1" min="0" max="100">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="edit-status">Status</label>
+            <select id="edit-status" class="form-control">
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="edit-city">City</label>
+            <input type="text" id="edit-city" class="form-control">
+          </div>
+          <div class="form-group full-width">
+            <label class="form-label" for="edit-skills">Skills (comma-separated)</label>
+            <input type="text" id="edit-skills" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" data-close="modal-edit-student">Cancel</button>
+          <button type="submit" class="btn-primary">Update Student</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: VIEW STUDENT DETAILS -->
+  <div class="modal-backdrop" id="modal-view-student">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="view-student-title">Student Profile</h3>
+        <button class="modal-close-btn" data-close="modal-view-student">&times;</button>
+      </div>
+      <div id="view-student-body">
+        <!-- Populated via JS -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-primary" data-close="modal-view-student">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Application Logic JS -->
+  <script src="js/app.js"></script>
+</body>
+</html>

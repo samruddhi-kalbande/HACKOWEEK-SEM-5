@@ -1,4 +1,3 @@
-"""Week 11–12 practical: PCA and t-SNE on the Week 9–10 student dataset."""
 
 from pathlib import Path
 

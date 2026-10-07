@@ -1,6 +1,21 @@
 # Week 11–12: Dimensionality Reduction with PCA and t-SNE
 
+[![PCA](https://img.shields.io/badge/PCA-Principal%20Component%20Analysis-blue.svg)](https://scikit-learn.org/stable/modules/decomposition.html#pca)
+[![t-SNE](https://img.shields.io/badge/t--SNE-Visualization-green.svg)](https://scikit-learn.org/stable/modules/manifold.html#t-sne)
+[![Jupyter](https://img.shields.io/badge/Notebook-Jupyter-red.svg)](notebooks/week11_week12_dimensionality_reduction.ipynb)
+
 This practical applies **Principal Component Analysis (PCA)** and **t-distributed Stochastic Neighbor Embedding (t-SNE)** to the student-performance dataset used in Week 9–10.
+
+## 📓 Jupyter Notebook
+
+The complete end-to-end coding walkthrough is in:
+[`notebooks/week11_week12_dimensionality_reduction.ipynb`](notebooks/week11_week12_dimensionality_reduction.ipynb)
+
+To launch the notebook:
+```bash
+cd "WEEK 11 - WEEK 12"
+jupyter notebook notebooks/week11_week12_dimensionality_reduction.ipynb
+```
 
 ## Dataset
 
@@ -72,9 +87,11 @@ The plots are colored by the existing `Distinction` indicator (`CGPA >= 8.5`) on
 ## Files
 
 ```text
-WEEK11 - WEEK12/
+WEEK 11 - WEEK 12/
 ├── README.md
 ├── dimensionality_reduction.py
+├── notebooks/
+│   └── week11_week12_dimensionality_reduction.ipynb
 ├── pca_projection.png          # generated after running the script
 ├── pca_explained_variance.png  # generated after running the script
 └── tsne_projection.png         # generated after running the script

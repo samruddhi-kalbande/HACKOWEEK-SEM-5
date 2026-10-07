@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ensemble Methods (Bagging, Boosting, XGBoost, LightGBM), Bias-Variance Trade-off, Overfitting/Underfitting Analysis, and Regularization (L1/L2) Studio for HACKOWEEK SEM 5.">
+  <title>Ensemble &amp; Regularization Studio | Week 13 &amp; 14 HACKOWEEK</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="header-container">
+      <a href="#" class="brand-wrapper">
+        <div class="brand-icon">🚀</div>
+        <div class="brand-text">
+          <h1>Ensemble &amp; Regularization Studio</h1>
+          <span class="brand-badge">W13-W14: Bagging &bull; Boosting &bull; Bias-Variance &bull; L1/L2</span>
+        </div>
+      </a>
+
+      <nav class="nav-tabs" aria-label="Week 13-14 Navigation">
+        <button class="nav-btn active" data-tab="ensemble">
+          <span>🌲</span> Ensemble Methods
+        </button>
+        <button class="nav-btn" data-tab="bias-variance">
+          <span>⚖️</span> Bias-Variance
+        </button>
+        <button class="nav-btn" data-tab="overfitting">
+          <span>📉</span> Overfitting
+        </button>
+        <button class="nav-btn" data-tab="regularization">
+          <span>🔒</span> Regularization
+        </button>
+        <button class="nav-btn" data-tab="notebook">
+          <span>📓</span> Notebook
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+      <h2>Ensemble Methods, Bias-Variance &amp; Regularization</h2>
+      <p>Week 13–14 deep dive into Bagging (Random Forest), Boosting (XGBoost, LightGBM, Gradient Boosting), the Bias-Variance Trade-off, Overfitting &amp; Underfitting diagnostics, and L1/L2 Regularization techniques on the Student Performance Dataset.</p>
+      <div class="hero-tags">
+        <span class="hero-pill">🌲 Bagging &amp; Random Forest</span>
+        <span class="hero-pill">⚡ XGBoost &amp; LightGBM</span>
+        <span class="hero-pill">⚖️ Bias-Variance Trade-off</span>
+        <span class="hero-pill">📉 Overfitting &amp; Underfitting</span>
+        <span class="hero-pill">🔒 L1 (Lasso) &amp; L2 (Ridge)</span>
+      </div>
+    </section>
+
+    <!-- ═══ TAB 1: ENSEMBLE METHODS ═══ -->
+    <section class="tab-content active" id="pane-ensemble">
+      <div class="card-panel">
+        <div class="panel-header">
+          <h3><span>🌲</span> Ensemble Methods: Bagging vs Boosting</h3>
+          <p>Comparing Bagging ensembles (Random Forest, BaggingClassifier) with Boosting ensembles (Gradient Boosting, XGBoost, LightGBM) on the Student Distinction task.</p>
+        </div>
+
+        <!-- Explanation Cards -->
+        <div class="split-grid" style="margin-bottom: 1.5rem;">
+          <div class="info-card" style="border-left: 3px solid var(--accent-emerald);">
+            <div class="info-card-title" style="color: #6ee7b7;">🛍️ Bagging (Bootstrap Aggregating)</div>
+            <p>Trains multiple models in <strong>parallel</strong> on random bootstrap subsets of data. Reduces <em>variance</em> by averaging predictions. Random Forest adds feature randomisation for further de-correlation.</p>
+          </div>
+          <div class="info-card" style="border-left: 3px solid var(--accent-violet);">
+            <div class="info-card-title" style="color: #c4b5fd;">🔥 Boosting (Sequential Learning)</div>
+            <p>Trains models <strong>sequentially</strong>, each focusing on previously misclassified samples. Reduces <em>bias</em> by iteratively correcting errors. XGBoost &amp; LightGBM add regularisation and histogram-based splits.</p>
+          </div>
+        </div>
+
+        <!-- Model Cards Grid -->
+        <div id="ensemble-models-grid" class="model-grid">
+          <div style="text-align: center; color: var(--text-muted); padding: 2rem;">
+            <span class="spinner"></span> Loading ensemble comparison…
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature Importance Chart -->
+      <div class="card-panel">
+        <div class="panel-header">
+          <h3><span>📊</span> Feature Importance Comparison</h3>
+          <p>Relative feature importance from the best-performing ensemble model, indicating which features contribute most to Distinction classification.</p>
+        </div>
+        <div class="canvas-wrapper">
+          <canvas id="canvas-feature-importance" width="600" height="280"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TAB 2: BIAS-VARIANCE TRADE-OFF ═══ -->
+    <section class="tab-content" id="pane-bias-variance">
+      <div class="card-panel">
+        <div class="panel-header">
+          <h3><span>⚖️</span> Bias-Variance Trade-off</h3>
+          <p>Demonstrating how model complexity (tree depth) affects the balance between bias (underfitting) and variance (overfitting). The gap between train and test accuracy reveals overfitting.</p>
+        </div>
+
+        <div class="split-grid">
+          <div class="canvas-wrapper">
+            <div class="chart-title">Train vs Test Accuracy by Tree Depth</div>
+            <canvas id="canvas-bias-variance" width="500" height="300"></canvas>
+          </div>
+
+          <div>
+            <div id="bv-optimal-badge" style="margin-bottom: 1rem;"></div>
+            <div id="bv-interpretation" style="display: flex; flex-direction: column; gap: 0.75rem;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gap Analysis Table -->
+      <div class="card-panel">
+        <div class="panel-header">
+          <h3><span>📋</span> Depth-wise Performance Table</h3>
+        </div>
+        <div style="overflow-x: auto;">
+          <table id="bv-table" style="width: 100%; border-collapse: collapse; font-size: 0.84rem;">
+            <thead>
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <th style="text-align: left; padding: 10px; color: #6ee7b7;">Depth</th>
+                <th style="text-align: center; padding: 10px; color: #38bdf8;">Train Acc</th>
+                <th style="text-align: center; padding: 10px; color: #f59e0b;">Test Acc</th>
+                <th style="text-align: center; padding: 10px; color: #f43f5e;">Gap</th>
+                <th style="text-align: center; padding: 10px; color: var(--text-muted);">Test Std</th>
+              </tr>
+            </thead>
+            <tbody id="bv-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TAB 3: OVERFITTING & UNDERFITTING ═══ -->
+    <section class="tab-content" id="pane-overfitting">
+      <div class="card-panel">
+        <div class="panel-header">
+          <h3><span>📉</span> Overfitting &amp; Underfitting — Learning Curves</h3>
+          <p>Learning curves show how training and validation scores change with increasing training set size, revealing whether a model is underfitting, overfitting, or well-generalised.</p>
+        </div>
+
+        <div id="learning-curves-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem;">
+          <div style="text-align: center; color: var(--text-muted); padding: 2rem; grid-column: 1/-1;">
+            <span class="spinner"></span> Computing learning curves…
+          </div>
+        </div>
+      </div>
+
+      <!-- Causes & Prevention -->
+      <div class="split-grid">
+        <div class="card-panel">
+          <div class="panel-header">
+            <h3><span>🔍</span> Causes of Overfitting &amp; Underfitting</h3>
+          </div>
+          <div id="of-causes" style="display: flex; flex-direction: column; gap: 0.65rem;"></div>
+        </div>
+        <div class="card-panel">
+          <div class="panel-header">
+            <h3><span>🛡️</span> Prevention Strategies</h3>
+          </div>
+          <div id="of-prevention" style="display: flex; flex-direction: column; gap: 0.65rem;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TAB 4: REGULARIZATION (L1/L2) ═══ -->
+    <section class="tab-content" id="pane-regularization">
+      <div class="card-panel">
+        <div class="panel-header">
+          <h3><span>🔒</span> Regularization: L1 (Lasso) vs L2 (Ridge)</h3>
+          <p>Regularization adds a penalty to the loss function to constrain model weights, reducing overfitting and improving generalisation on unseen data.</p>
+        </div>
+
+        <!-- Explanation Cards -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div class="info-card" style="border-left: 3px solid var(--accent-amber);">
+            <div class="info-card-title" style="color: #fbbf24;">L1 — Lasso Regularization</div>
+            <p>Adds <code>λ·Σ|wᵢ|</code> penalty. Drives weak coefficients to <strong>exactly zero</strong>, performing built-in feature selection.</p>
+          </div>
+          <div class="info-card" style="border-left: 3px solid var(--accent-sky);">
+            <div class="info-card-title" style="color: #38bdf8;">L2 — Ridge Regularization</div>
+            <p>Adds <code>λ·Σwᵢ²</code> penalty. Shrinks all coefficients <strong>uniformly towards zero</strong>. No feature elimination, just weight decay.</p>
+          </div>
+          <div class="info-card" style="border-left: 3px solid var(--accent-rose);">
+            <div class="info-card-title" style="color: #fb7185;">C = 1/λ (Inverse Strength)</div>
+            <p>Small C → strong regularization. Large C → weak regularization (closer to unregularized model). Tuned via cross-validation.</p>
+          </div>
+        </div>
+
+        <!-- C-Sweep Chart -->
+        <div class="split-grid">
+          <div class="canvas-wrapper">
+            <div class="chart-title">L1 vs L2 Test Accuracy across C values</div>
+            <canvas id="canvas-c-sweep" width="500" height="280"></canvas>
+          </div>
+          <div>
+            <div class="chart-title">Coefficient Magnitudes (L1 vs L2 vs None)</div>
+            <div id="coeff-comparison-container" class="coeff-bar-container"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Features Table -->
+      <div class="card-panel">
+        <div class="panel-header">
+          <h3><span>📋</span> L1 Feature Sparsity: Active Features per C Value</h3>
+          <p>L1 regularization progressively sets coefficients to zero as regularization strength increases (C decreases), effectively selecting the most important features.</p>
+        </div>
+        <div style="overflow-x: auto;">
+          <table id="reg-table" style="width: 100%; border-collapse: collapse; font-size: 0.84rem;">
+            <thead>
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <th style="text-align: left; padding: 10px; color: #fbbf24;">C value</th>
+                <th style="text-align: center; padding: 10px; color: #6ee7b7;">L1 Train Acc</th>
+                <th style="text-align: center; padding: 10px; color: #38bdf8;">L1 Test Acc</th>
+                <th style="text-align: center; padding: 10px; color: #c4b5fd;">L1 Active Features</th>
+                <th style="text-align: center; padding: 10px; color: #6ee7b7;">L2 Train Acc</th>
+                <th style="text-align: center; padding: 10px; color: #38bdf8;">L2 Test Acc</th>
+              </tr>
+            </thead>
+            <tbody id="reg-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TAB 5: JUPYTER NOTEBOOK ═══ -->
+    <section class="tab-content" id="pane-notebook">
+      <div class="card-panel">
+        <div class="panel-header">
+          <h3>📓 Jupyter Notebook Reference</h3>
+          <p>The complete Ensemble Methods, Bias-Variance analysis, Overfitting diagnostics, and Regularization code are documented in the notebook.</p>
+        </div>
+
+        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap;">
+          <span class="hero-pill">📁 File: <code>notebooks/week13_week14_ensemble_regularization.ipynb</code></span>
+          <span class="hero-pill">⚡ Engine: Ensemble &amp; Regularization</span>
+          <span class="hero-pill">🏁 Status: Complete</span>
+        </div>
+
+        <h4 style="margin-bottom: 0.5rem; color: #6ee7b7;">Run the Notebook Locally:</h4>
+        <div class="code-box">
+cd "WEEK1 - WEEK2/WEEK13 - WEEK14"
+jupyter notebook notebooks/week13_week14_ensemble_regularization.ipynb
+        </div>
+
+        <h4 style="margin-top: 1.5rem; margin-bottom: 0.5rem; color: #6ee7b7;">Run the Web Dashboard:</h4>
+        <div class="code-box">
+cd "WEEK1 - WEEK2/WEEK13 - WEEK14"
+python app.py
+# Navigate to http://localhost:5006
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

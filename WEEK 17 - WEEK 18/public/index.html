@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PyTorch, CNNs, RNNs/LSTMs, Regularization, Transfer Learning, Hugging Face Transformers & LLM APIs Studio for Week 17-18 HACKOWEEK.">
+  <title>Deep Learning &amp; LLM Studio | Week 17 &amp; 18 HACKOWEEK</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <a href="#" class="brand-wrapper">
+        <div class="brand-icon">🔥</div>
+        <div class="brand-text">
+          <h1>Deep Learning &amp; LLM Studio</h1>
+          <span class="brand-badge">W17-W18: PyTorch &bull; CNNs &bull; RNNs/LSTMs &bull; Transformers &bull; LLMs</span>
+        </div>
+      </a>
+
+      <nav class="nav-tabs" aria-label="Deep Learning Navigation">
+        <button class="nav-btn active" data-tab="pytorch">
+          <span>🔥</span> PyTorch &amp; Autograd
+        </button>
+        <button class="nav-btn" data-tab="cnn">
+          <span>🖼️</span> CNNs &amp; Convolutions
+        </button>
+        <button class="nav-btn" data-tab="sequences">
+          <span>🔄</span> RNN &bull; LSTM &bull; GRU
+        </button>
+        <button class="nav-btn" data-tab="regularization">
+          <span>🛡️</span> Regularization &amp; Transfer
+        </button>
+        <button class="nav-btn" data-tab="transformers">
+          <span>🤗</span> Transformers &amp; LLMs
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+      <div class="hero-content">
+        <h2>Advanced Deep Learning &amp; Modern Generative AI</h2>
+        <p>Comprehensive interactive workbench covering PyTorch tensors, autograd mechanics, CNN architectures, RNN/LSTM sequence dynamics, regularization (Dropout/BatchNorm/Early Stopping), Pretrained Transfer Learning, Hugging Face Transformers, and LLM APIs.</p>
+        <div class="hero-tags">
+          <span class="hero-pill">🔥 PyTorch 2.x &bull; Dynamic Graphs</span>
+          <span class="hero-pill">🖼️ CNNs &bull; Convolutions &bull; Pooling</span>
+          <span class="hero-pill">🔄 RNN &bull; LSTM &bull; GRU Sequence Models</span>
+          <span class="hero-pill">🛡️ Dropout &bull; BatchNorm &bull; Early Stopping</span>
+          <span class="hero-pill">🚀 Transfer Learning (ResNet / MobileNet)</span>
+          <span class="hero-pill">🤗 Hugging Face &bull; OpenAI &bull; Anthropic &bull; Ollama</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 1: PYTORCH & AUTOGRAD -->
+    <section id="pytorch-tab" class="tab-content active">
+      <div class="section-title-wrap">
+        <h3>🔥 Intro to PyTorch: Tensors, Autograd &amp; Custom Training Loop</h3>
+        <p>Exploring dynamic computation graphs, automatic differentiation (Autograd), and training PyTorch neural networks.</p>
+      </div>
+
+      <div class="grid-2col">
+        <!-- Autograd Calculator Card -->
+        <div class="card">
+          <div class="card-header">
+            <div class="badge-icon badge-pytorch">∂y</div>
+            <div>
+              <h4>Autograd Differentiation Engine</h4>
+              <span class="sub-label">Dynamic Reverse-Mode Automatic Differentiation</span>
+            </div>
+          </div>
+
+          <div class="formula-box">
+            <div class="formula-row">
+              <span class="formula-label">Function:</span>
+              <code class="formula-code">y = 3x³ + 2x² + 5x + 1</code>
+            </div>
+            <div class="formula-row">
+              <span class="formula-label">Derivative:</span>
+              <code class="formula-code">dy/dx = 9x² + 4x + 5</code>
+            </div>
+          </div>
+
+          <div class="stat-grid mt-3">
+            <div class="stat-box">
+              <span class="stat-title">Input Value (x)</span>
+              <span id="autograd-x" class="stat-val stat-cyan">2.50</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-title">Function Value y(x)</span>
+              <span id="autograd-y" class="stat-val stat-purple">72.875</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-title">Computed Gradient dy/dx</span>
+              <span id="autograd-grad" class="stat-val stat-emerald">71.25</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-title">PyTorch Backend</span>
+              <span id="pytorch-version" class="stat-val stat-green">PyTorch 2.14</span>
+            </div>
+          </div>
+          <p class="text-muted text-sm mt-2">Autograd tracks all operations on tensors with <code>requires_grad=True</code> to build a directed acyclic graph (DAG), computing exact gradients via <code>y.backward()</code>.</p>
+        </div>
+
+        <!-- PyTorch Training Loop Simulator -->
+        <div class="card">
+          <div class="card-header">
+            <div class="badge-icon badge-orange">⚡</div>
+            <div>
+              <h4>Custom PyTorch Training Loop</h4>
+              <span class="sub-label">Trained on Student Performance Academic Dataset</span>
+            </div>
+          </div>
+
+          <div class="control-grid-inline">
+            <div class="control-group">
+              <label for="pt-epochs">Epochs: <span id="pt-epochs-val" class="highlight-val">40</span></label>
+              <input type="range" id="pt-epochs" min="10" max="100" step="5" value="40">
+            </div>
+            <div class="control-group">
+              <label for="pt-lr">Learning Rate: <span id="pt-lr-val" class="highlight-val">0.01</span></label>
+              <input type="range" id="pt-lr" min="0.001" max="0.05" step="0.002" value="0.01">
+            </div>
+            <button id="btn-train-pytorch" class="btn-primary">
+              <span>⚡</span> Run PyTorch Loop
+            </button>
+          </div>
+
+          <div class="stat-grid mt-3">
+            <div class="stat-box">
+              <span class="stat-title">Final Loss</span>
+              <span id="pt-final-loss" class="stat-val stat-purple">--</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-title">Final Accuracy</span>
+              <span id="pt-final-acc" class="stat-val stat-cyan">--%</span>
+            </div>
+          </div>
+
+          <div class="code-box-inline mt-3">
+            <code>optimizer.zero_grad() &bull; loss = criterion(outputs, y) &bull; loss.backward() &bull; optimizer.step()</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- Training Curve Chart -->
+      <div class="card chart-card mt-4">
+        <div class="chart-header">
+          <h4>📉 PyTorch Training Progression: Loss &amp; Accuracy</h4>
+          <span class="chart-tag">Autograd Optimization Loop</span>
+        </div>
+        <div class="chart-canvas-wrapper" style="height: 300px;">
+          <canvas id="pytorchTrainingChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: CNNS & CONVOLUTIONS -->
+    <section id="cnn-tab" class="tab-content">
+      <div class="section-title-wrap">
+        <h3>🖼️ Convolutional Neural Networks (CNNs)</h3>
+        <p>Spatial convolutions, pooling layers, receptive fields, and feature extraction for image classification.</p>
+      </div>
+
+      <!-- Spatial Dimension Math Formula -->
+      <div class="card mb-4 formula-card">
+        <h4>📐 Spatial Feature Map Dimension Formula</h4>
+        <div class="formula-large">
+          <code>W_{out} = ⌊ \frac{W_{in} - Kernel + 2 \cdot Padding}{Stride} ⌋ + 1</code>
+        </div>
+        <p class="text-muted text-sm mt-2">Governs how spatial resolutions contract through consecutive convolutional and pooling operations across the network hierarchy.</p>
+      </div>
+
+      <!-- Pipeline Stages Grid -->
+      <div class="grid-2col">
+        <div class="card">
+          <div class="card-header">
+            <h4>CNN Layer Architecture Walkthrough</h4>
+            <span class="chart-tag">28×28 Grayscale Input</span>
+          </div>
+          <div class="table-container">
+            <table class="custom-table" id="cnn-stages-table">
+              <thead>
+                <tr>
+                  <th>Stage / Layer</th>
+                  <th>Output Shape</th>
+                  <th>Operation Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 3x3 Convolution Filters -->
+        <div class="card">
+          <div class="card-header">
+            <h4>Interactive Convolution Filter Kernels</h4>
+            <span class="chart-tag">3×3 Convolutional Filters</span>
+          </div>
+          <div class="kernel-selector mb-3">
+            <button class="chip-btn active" data-kernel="Sobel Horizontal (Edge Detection)">Sobel Horizontal</button>
+            <button class="chip-btn" data-kernel="Sobel Vertical (Edge Detection)">Sobel Vertical</button>
+            <button class="chip-btn" data-kernel="Sharpen Kernel">Sharpen</button>
+            <button class="chip-btn" data-kernel="Gaussian Blur (Smoothing)">Gaussian Blur</button>
+          </div>
+          <div class="kernel-matrix-display" id="kernel-matrix">
+            <!-- 3x3 matrix rendered here -->
+          </div>
+          <p class="text-muted text-sm mt-3" id="kernel-desc">Detects sharp horizontal transitions in pixel intensities (gradients along the Y-axis).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: RNN, LSTM & GRU -->
+    <section id="sequences-tab" class="tab-content">
+      <div class="section-title-wrap">
+        <h3>🔄 Sequence Modeling: RNN vs LSTM vs GRU</h3>
+        <p>Analyzing recurrence relations, gating mechanisms, cell states, and vanishing gradient solutions on temporal data.</p>
+      </div>
+
+      <div class="grid-2col">
+        <!-- Loss Decay Comparison -->
+        <div class="card chart-card">
+          <div class="chart-header">
+            <h4>📉 Sequential Convergence Trajectories</h4>
+            <span class="chart-tag">Multi-Step Loss Decay</span>
+          </div>
+          <div class="chart-canvas-wrapper" style="height: 320px;">
+            <canvas id="sequenceLossChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Parameter Footprint -->
+        <div class="card chart-card">
+          <div class="chart-header">
+            <h4>📊 Parameter Footprint &amp; Complexity</h4>
+            <span class="chart-tag">Hidden Dim = 32</span>
+          </div>
+          <div class="chart-canvas-wrapper" style="height: 320px;">
+            <canvas id="sequenceParamsChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Architecture Comparison Cards -->
+      <div class="grid-3col mt-4">
+        <div class="card algo-card">
+          <div class="algo-header">
+            <span class="algo-badge badge-sgd">RNN</span>
+            <h4>Vanilla RNN</h4>
+          </div>
+          <code class="algo-formula">h_t = tanh(W_{hh}h_{t-1} + W_{xh}x_t + b)</code>
+          <p class="text-sm text-muted">Single recurrent hidden state. Highly susceptible to vanishing and exploding gradients when sequence length exceeds 15 steps.</p>
+        </div>
+
+        <div class="card algo-card">
+          <div class="algo-header">
+            <span class="algo-badge badge-momentum">LSTM</span>
+            <h4>Long Short-Term Memory</h4>
+          </div>
+          <code class="algo-formula">c_t = f_t ⊙ c_{t-1} + i_t ⊙ c̃_t; h_t = o_t ⊙ tanh(c_t)</code>
+          <p class="text-sm text-muted">Maintains a separate additive cell state $c_t$ with Forget ($f_t$), Input ($i_t$), and Output ($o_t$) gates, preserving memories across 100+ steps.</p>
+        </div>
+
+        <div class="card algo-card">
+          <div class="algo-header">
+            <span class="algo-badge badge-adam">GRU</span>
+            <h4>Gated Recurrent Unit</h4>
+          </div>
+          <code class="algo-formula">h_t = (1 - z_t) ⊙ h_{t-1} + z_t ⊙ h̃_t</code>
+          <p class="text-sm text-muted">Merges cell and hidden state with Update ($z_t$) and Reset ($r_t$) gates. 25% fewer parameters than LSTM with comparable performance.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: REGULARIZATION & TRANSFER LEARNING -->
+    <section id="regularization-tab" class="tab-content">
+      <div class="section-title-wrap">
+        <h3>🛡️ Regularization in Deep Learning &amp; Transfer Learning</h3>
+        <p>Preventing overfitting with Dropout, Batch Normalization, and Early Stopping, plus leveraging pretrained CNN backbones.</p>
+      </div>
+
+      <div class="grid-2col">
+        <!-- Overfitting vs Regularized Chart -->
+        <div class="card chart-card">
+          <div class="chart-header">
+            <h4>📉 Generalization Gap: Unregularized vs Regularized</h4>
+            <span class="chart-tag">Dropout (p=0.4) + BatchNorm</span>
+          </div>
+          <div class="chart-canvas-wrapper" style="height: 320px;">
+            <canvas id="regularizationChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Strategy Details -->
+        <div class="card">
+          <div class="card-header">
+            <h4>Regularization Techniques</h4>
+            <span class="chart-tag">Mechanisms</span>
+          </div>
+          <div class="info-block mb-3">
+            <h5 class="stat-cyan">1. Dropout (p = 0.2 – 0.5)</h5>
+            <p class="text-sm text-muted">Randomly deactivates a fraction of neurons per forward pass during training. Forces network to develop robust, non-co-adaptive internal features.</p>
+          </div>
+          <div class="info-block mb-3">
+            <h5 class="stat-emerald">2. Batch Normalization (BatchNorm)</h5>
+            <p class="text-sm text-muted">Standardizes layer inputs $(\mu = 0, \sigma = 1)$ across the mini-batch with learnable scale $\gamma$ and shift $\beta$, accelerating convergence and smoothing the loss landscape.</p>
+          </div>
+          <div class="info-block">
+            <h5 class="stat-amber">3. Early Stopping (Patience = 4)</h5>
+            <p class="text-sm text-muted">Tracks validation loss across epochs. Automatically halts training when validation error diverges for $k$ consecutive epochs and restores the optimal weight checkpoint.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Transfer Learning Overview -->
+      <div class="card mt-4">
+        <h4>🚀 Transfer Learning with Pretrained CNNs (ResNet &amp; MobileNet)</h4>
+        <div class="grid-2col mt-3">
+          <div class="pro-card">
+            <h5>Feature Extraction (Frozen Backbone)</h5>
+            <p class="text-sm text-muted">Freeze all convolutional weights (<code>param.requires_grad = False</code>) and train only the newly attached linear classification head. Ideal for small datasets with rapid convergence.</p>
+          </div>
+          <div class="pro-card">
+            <h5>Fine-Tuning (Differential Learning Rates)</h5>
+            <p class="text-sm text-muted">Unfreeze top convolutional layers and train with a very small learning rate ($\approx 10^{-5}$), adapting general visual representations to domain-specific datasets.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: TRANSFORMERS & LLMS -->
+    <section id="transformers-tab" class="tab-content">
+      <div class="section-title-wrap">
+        <h3>🤗 Hugging Face Transformers &amp; LLM APIs</h3>
+        <p>Interactive tokenization breakdown, sentiment classification pipelines, and unified multi-provider LLM API query workbench.</p>
+      </div>
+
+      <div class="grid-2col">
+        <!-- Hugging Face Tokenizer & Pipeline -->
+        <div class="card">
+          <div class="card-header">
+            <h4>🤗 Hugging Face Pipeline &amp; Tokenizer</h4>
+            <span class="chart-tag">WordPiece / BPE Breakdown</span>
+          </div>
+
+          <form id="hf-form" class="mt-2">
+            <div class="form-group">
+              <label for="hf-input-text">Input Text:</label>
+              <input type="text" id="hf-input-text" value="The deep learning course at SIT Nagpur was thoroughly engaging and insightful!" required>
+            </div>
+            <button type="submit" class="btn-primary mt-2">
+              <span>🤗</span> Analyze with Transformer Pipeline
+            </button>
+          </form>
+
+          <div class="mt-3">
+            <h5>Tokenization Stream:</h5>
+            <div class="token-chips-wrap" id="token-chips">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <div class="stat-grid mt-3">
+            <div class="stat-box">
+              <span class="stat-title">Sentiment Label</span>
+              <span id="hf-sentiment-label" class="stat-val stat-emerald">POSITIVE</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-title">Confidence</span>
+              <span id="hf-confidence" class="stat-val stat-cyan">0.94</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- LLM API Query Workbench -->
+        <div class="card">
+          <div class="card-header">
+            <h4>💬 LLM API Query Workbench</h4>
+            <span class="chart-tag">Multi-Provider Client</span>
+          </div>
+
+          <form id="llm-form" class="mt-2">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="llm-provider">Provider:</label>
+                <select id="llm-provider" class="custom-select">
+                  <option value="simulation" selected>Local Engine (Offline Academic Simulation)</option>
+                  <option value="openai">OpenAI (GPT-4o-mini)</option>
+                  <option value="anthropic">Anthropic (Claude 3.5 Sonnet)</option>
+                  <option value="ollama">Ollama (Local http://localhost:11434)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="llm-task">Task Type:</label>
+                <select id="llm-task" class="custom-select">
+                  <option value="qa" selected>Academic Question Answering</option>
+                  <option value="summarization">Concept Summarization</option>
+                  <option value="code">PyTorch Code Generation</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="llm-prompt">Prompt:</label>
+              <input type="text" id="llm-prompt" value="Explain why PyTorch Autograd is crucial for modern deep learning models." required>
+            </div>
+
+            <button type="submit" class="btn-primary mt-2 w-100">
+              <span>🚀</span> Dispatch LLM Query
+            </button>
+          </form>
+
+          <div class="llm-response-box mt-3" id="llm-output-wrap">
+            <div class="response-header">
+              <span id="llm-provider-tag" class="tag-pill">LOCAL ENGINE</span>
+              <span id="llm-latency-tag" class="tag-latency">-- ms</span>
+            </div>
+            <div id="llm-response-text" class="response-content">
+              Submit prompt above to query the LLM engine.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <p>SIT Nagpur &bull; Hack-o-Week 5th Semester &bull; Week 17–18 Deep Learning &amp; Generative AI Studio</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

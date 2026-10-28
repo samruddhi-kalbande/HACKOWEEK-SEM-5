@@ -8,7 +8,7 @@
 
 > **SIT Nagpur — Hack-o-Week | 5th Semester (Third Year)**
 >
-> A progressive, 16-week Machine Learning curriculum — from REST APIs & Python fundamentals to Ensemble Methods & Neural Networks from Scratch. Each bi-weekly module contains a Jupyter Notebook, an interactive web dashboard, and a dedicated ML engine built on the **Kaggle Student Performance & Academic Insights Dataset**.
+> A progressive, 18-week Machine Learning and Deep Learning curriculum — from REST APIs & Python fundamentals to Ensemble Methods, PyTorch, Transformers, and LLM APIs. Each bi-weekly module contains a Jupyter Notebook, an interactive web dashboard, and a dedicated ML engine built on the **Kaggle Student Performance & Academic Insights Dataset**.
 
 ---
 
@@ -24,6 +24,7 @@
 | **11 – 12** | [Dimensionality Reduction](WEEK%2011%20-%20WEEK%2012/) | PCA, t-SNE, Explained Variance, Perplexity Tuning | 📓 📄 |
 | **13 – 14** | [Ensemble Methods & Regularization](WEEK%2013%20-%20WEEK%2014/) | Bagging, Boosting, XGBoost, LightGBM, Bias-Variance, L1/L2 | 📓 🌐 📄 |
 | **15 – 16** | [Deep Learning & Model Deployment](WEEK%2015%20-%20WEEK%2016/) | Pickle/Joblib, Perceptrons, Activations, SGD/Adam, NumPy NN | 📓 🌐 📄 |
+| **17 – 18** | [Deep Learning & LLMs](WEEK%2017%20-%20WEEK%2018/) | PyTorch, Autograd, CNNs, RNNs/LSTMs, Regularization, HF, LLM APIs | 📓 🌐 📄 |
 
 > **Legend:** 📓 Jupyter Notebook · 🌐 Interactive Web Dashboard · 📄 README Documentation
 
@@ -82,12 +83,19 @@ HACKOWEEK-SEM-5/
 │   ├── data/                          # Dataset
 │   └── public/                        # Interactive dashboard
 │
-└── WEEK 15 - WEEK 16/                 ← Deep Learning & Model Deployment
-    ├── app.py                         # Flask web server (port 5007)
-    ├── nn_deployment_engine.py        # Pure NumPy NN, optimizers, deployment engine
+├── WEEK 15 - WEEK 16/                 ← Deep Learning & Model Deployment
+│   ├── app.py                         # Flask web server (port 5007)
+│   ├── nn_deployment_engine.py        # Pure NumPy NN, optimizers, deployment engine
+│   ├── notebooks/                     # Jupyter notebook
+│   ├── data/                          # Dataset
+│   ├── models/                        # Serialized models (.pkl, .joblib)
+│   └── public/                        # Interactive dashboard
+│
+└── WEEK 17 - WEEK 18/                 ← Advanced Deep Learning & Generative AI
+    ├── app.py                         # Flask web server (port 5008)
+    ├── deep_learning_engine.py        # PyTorch engine, CNNs, RNNs, HF & LLM client
     ├── notebooks/                     # Jupyter notebook
     ├── data/                          # Dataset
-    ├── models/                        # Serialized models (.pkl, .joblib)
     └── public/                        # Interactive dashboard
 ```
 
@@ -145,6 +153,15 @@ HACKOWEEK-SEM-5/
 - **Perceptrons & Activation Functions**: Rosenblatt single-layer perceptron, step updates, Sigmoid, ReLU, Leaky ReLU, Tanh, Softmax, vanishing gradient dynamics
 - **Loss Functions & Optimizers**: Binary Cross-Entropy (BCE) vs MSE, SGD, Momentum, Adam (adaptive moment estimation with bias correction), 2D ravine loss landscape trajectories
 - **NumPy Neural Network from Scratch**: Multi-layer perceptron with He initialization, forward propagation, analytical backpropagation (chain rule), training/validation history, non-linear decision boundaries
+
+### Week 17 – Week 18: Advanced Deep Learning & Generative AI
+- **PyTorch Foundations**: Dynamic computation graphs, tensors, automatic differentiation (`autograd`), custom modular training loop
+- **Convolutional Neural Networks (CNNs)**: Convolutions (`Conv2d`), spatial pooling (`MaxPool2d`), receptive fields, feature maps, spatial dimension calculus ($W_{out}$)
+- **Sequence Modeling (RNN, LSTM, GRU)**: Temporal sequence processing, hidden states ($h_t$), cell memory ($c_t$), gating mechanisms (forget/input/output vs update/reset), vanishing gradient remedies
+- **Regularization in Deep Learning**: Inverted Dropout ($p=0.4$), Batch Normalization (`BatchNorm1d`), Early Stopping with validation checkpoints and patience
+- **Transfer Learning**: Pretrained CNN backbones (ResNet-18, MobileNet-V3), feature extraction vs fine-tuning workflows
+- **Hugging Face Transformers**: Pipelines, tokenizers (WordPiece / BPE), token IDs, attention masks, text classification
+- **LLM APIs & Generative AI**: OpenAI, Anthropic, Hugging Face Inference API, Ollama (local LLMs), prompt engineering for Q&A, code generation, and summarization
 
 ---
 

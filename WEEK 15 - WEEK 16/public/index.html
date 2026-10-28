@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Neural Networks from Scratch (NumPy), Model Deployment (Pickle vs Joblib), Activation Functions, and Optimizers Studio for Week 15-16 HACKOWEEK.">
+  <title>Neural Networks &amp; Model Deployment Studio | Week 15 &amp; 16 HACKOWEEK</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Top App Navigation -->
+  <header class="app-header">
+    <div class="header-container">
+      <a href="#" class="brand-wrapper">
+        <div class="brand-icon">🧠</div>
+        <div class="brand-text">
+          <h1>Neural Networks &amp; Deployment Studio</h1>
+          <span class="brand-badge">W15-W16: NumPy MLP &bull; Pickle/Joblib &bull; Activations &bull; SGD &bull; Adam</span>
+        </div>
+      </a>
+
+      <nav class="nav-tabs" aria-label="Module Navigation">
+        <button class="nav-btn active" data-tab="deployment">
+          <span>📦</span> Model Deployment
+        </button>
+        <button class="nav-btn" data-tab="neuralnet">
+          <span>⚡</span> NumPy Neural Net
+        </button>
+        <button class="nav-btn" data-tab="activations">
+          <span>📈</span> Activations &amp; Perceptron
+        </button>
+        <button class="nav-btn" data-tab="optimizers">
+          <span>🎯</span> Loss &amp; Optimizers
+        </button>
+        <button class="nav-btn" data-tab="inference">
+          <span>🔮</span> Live Inference
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+      <div class="hero-content">
+        <h2>Deep Learning Fundamentals &amp; Production Deployment</h2>
+        <p>Comprehensive interactive workbench for building Multi-Layer Perceptrons from scratch using pure NumPy, comparing SGD vs Adam optimizers, analyzing activation gradients, and mastering model serialization with Pickle vs Joblib.</p>
+        <div class="hero-tags">
+          <span class="hero-pill">📦 Pickle &amp; Joblib Serialization</span>
+          <span class="hero-pill">🧠 NumPy MLP from Scratch</span>
+          <span class="hero-pill">🔁 Forward &amp; Backward Propagation</span>
+          <span class="hero-pill">🚀 SGD &bull; Momentum &bull; Adam</span>
+          <span class="hero-pill">📊 Binary Cross-Entropy Loss</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 1: MODEL DEPLOYMENT (PICKLE VS JOBLIB) -->
+    <section id="deployment-tab" class="tab-content active">
+      <div class="section-title-wrap">
+        <h3>📦 Model Deployment Basics: Serialization &amp; Persistence</h3>
+        <p>Comparing Python's standard <code>pickle</code> vs Scikit-Learn's optimized <code>joblib</code> for packaging pipelines, weights, and preprocessors for production serving.</p>
+      </div>
+
+      <div class="grid-2col">
+        <!-- Pickle Card -->
+        <div class="card metric-card">
+          <div class="card-header">
+            <div class="badge-icon badge-pickle">🐍</div>
+            <div>
+              <h4>Python Standard <code>pickle</code></h4>
+              <span class="sub-label">Standard Object Serialization Protocol</span>
+            </div>
+          </div>
+          <div class="stat-grid">
+            <div class="stat-box">
+              <span class="stat-title">File Size</span>
+              <span id="pickle-size" class="stat-val stat-purple">-- KB</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-title">Save Time</span>
+              <span id="pickle-save" class="stat-val stat-cyan">-- ms</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-title">Load Time</span>
+              <span id="pickle-load" class="stat-val stat-emerald">-- ms</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-title">Integrity</span>
+              <span id="pickle-valid" class="stat-val stat-green">Verified</span>
+            </div>
+          </div>
+          <ul class="feature-bullets">
+            <li>Built-in standard library module (zero external dependencies).</li>
+            <li>Serializes arbitrary Python object graphs via bytecode streams.</li>
+            <li>Higher memory overhead and uncompressed binary size for large NumPy arrays.</li>
+          </ul>
+        </div>
+
+        <!-- Joblib Card -->
+        <div class="card metric-card">
+          <div class="card-header">
+            <div class="badge-icon badge-joblib">⚡</div>
+            <div>
+              <h4>Scikit-Learn <code>joblib</code></h4>
+              <span class="sub-label">NumPy/SciPy Optimized Persistence</span>
+            </div>
+          </div>
+          <div class="stat-grid">
+            <div class="stat-box">
+              <span class="stat-title">File Size</span>
+              <span id="joblib-size" class="stat-val stat-purple">-- KB</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-title">Save Time</span>
+              <span id="joblib-save" class="stat-val stat-cyan">-- ms</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-title">Load Time</span>
+              <span id="joblib-load" class="stat-val stat-emerald">-- ms</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-title">Integrity</span>
+              <span id="joblib-valid" class="stat-val stat-green">Verified</span>
+            </div>
+          </div>
+          <ul class="feature-bullets">
+            <li>Specialized fast I/O handlers for large numerical data structures.</li>
+            <li>Built-in transparent compression (zlib level 3) saves ~90% disk footprint.</li>
+            <li>Uses memory-mapping (<code>mmap</code>) under the hood for rapid cold-start serving.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Benchmark Chart Card -->
+      <div class="card chart-card mt-4">
+        <div class="chart-header">
+          <h4>📊 Benchmark Comparison: Pickle vs Joblib</h4>
+          <span class="chart-tag">Disk Footprint &amp; Latency</span>
+        </div>
+        <div class="chart-canvas-wrapper" style="height: 320px;">
+          <canvas id="deploymentBenchmarkChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Architectural Insights -->
+      <div class="card info-card mt-4">
+        <h4>🔒 Production Deployment Architecture &amp; Security</h4>
+        <div class="grid-3col">
+          <div class="info-block">
+            <h5>1. Serialization Security</h5>
+            <p>Both Pickle and Joblib execute arbitrary Python code during deserialization. Never deserialize models from untrusted origins without cryptographic HMAC checksums.</p>
+          </div>
+          <div class="info-block">
+            <h5>2. Environment Drift</h5>
+            <p>Pickled models depend strictly on identical library versions (e.g. <code>scikit-learn 1.5.x</code>). Pin Docker container runtime environments to guarantee consistency.</p>
+          </div>
+          <div class="info-block">
+            <h5>3. End-to-End Pipelines</h5>
+            <p>Always serialize the entire <code>Pipeline</code> containing <code>ColumnTransformer</code> and <code>StandardScaler</code> alongside the classifier to avoid train-serving feature skew.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: NUMPY NEURAL NETWORK FROM SCRATCH -->
+    <section id="neuralnet-tab" class="tab-content">
+      <div class="section-title-wrap">
+        <h3>⚡ Multi-Layer Perceptron from Scratch (Pure NumPy)</h3>
+        <p>Implemented without PyTorch or TensorFlow: manual He initialization, forward propagation, binary cross-entropy loss, backpropagation chain rule, and parameter updates.</p>
+      </div>
+
+      <!-- Hyperparameter Controls -->
+      <div class="card control-panel-card">
+        <div class="panel-header">
+          <h4>🛠️ Interactive Training Controls</h4>
+          <span class="panel-subtitle">Train the NumPy neural net on the Kaggle Student Dataset</span>
+        </div>
+        <div class="control-grid">
+          <div class="control-group">
+            <label for="nn-epochs">Epochs: <span id="nn-epochs-val" class="highlight-val">120</span></label>
+            <input type="range" id="nn-epochs" min="30" max="300" step="10" value="120">
+          </div>
+          <div class="control-group">
+            <label for="nn-lr">Learning Rate: <span id="nn-lr-val" class="highlight-val">0.03</span></label>
+            <input type="range" id="nn-lr" min="0.005" max="0.15" step="0.005" value="0.03">
+          </div>
+          <div class="control-group">
+            <label for="nn-act">Hidden Activation:</label>
+            <select id="nn-act" class="custom-select">
+              <option value="relu" selected>ReLU (Rectified Linear)</option>
+              <option value="leaky_relu">Leaky ReLU (α = 0.01)</option>
+              <option value="tanh">Tanh (Hyperbolic Tangent)</option>
+              <option value="sigmoid">Sigmoid</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label for="nn-opt">Optimizer:</label>
+            <select id="nn-opt" class="custom-select">
+              <option value="adam" selected>Adam (Adaptive Moment)</option>
+              <option value="momentum">SGD with Momentum (β=0.9)</option>
+              <option value="sgd">Vanilla SGD</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label for="nn-hidden">Hidden Layer Size:</label>
+            <select id="nn-hidden" class="custom-select">
+              <option value="8">8 Neurons</option>
+              <option value="16" selected>16 Neurons</option>
+              <option value="32">32 Neurons</option>
+            </select>
+          </div>
+          <div class="control-group action-group">
+            <button id="btn-train-nn" class="btn-primary">
+              <span class="btn-icon">⚡</span> Run NumPy Training
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Training Metrics Scoreboard -->
+      <div class="metrics-strip mt-4">
+        <div class="metric-pill">
+          <span class="pill-label">Test Accuracy</span>
+          <span id="nn-acc" class="pill-val stat-purple">--%</span>
+        </div>
+        <div class="metric-pill">
+          <span class="pill-label">F1-Score</span>
+          <span id="nn-f1" class="pill-val stat-cyan">--%</span>
+        </div>
+        <div class="metric-pill">
+          <span class="pill-label">Precision</span>
+          <span id="nn-prec" class="pill-val stat-emerald">--%</span>
+        </div>
+        <div class="metric-pill">
+          <span class="pill-label">Recall</span>
+          <span id="nn-rec" class="pill-val stat-amber">--%</span>
+        </div>
+        <div class="metric-pill">
+          <span class="pill-label">ROC-AUC</span>
+          <span id="nn-auc" class="pill-val stat-green">--%</span>
+        </div>
+        <div class="metric-pill">
+          <span class="pill-label">Train Latency</span>
+          <span id="nn-time" class="pill-val stat-blue">-- ms</span>
+        </div>
+      </div>
+
+      <!-- Training Curves -->
+      <div class="grid-2col mt-4">
+        <div class="card chart-card">
+          <div class="chart-header">
+            <h4>📉 Binary Cross-Entropy Loss Curve</h4>
+            <span class="chart-tag">Train vs Validation Loss</span>
+          </div>
+          <div class="chart-canvas-wrapper">
+            <canvas id="lossCurveChart"></canvas>
+          </div>
+        </div>
+
+        <div class="card chart-card">
+          <div class="chart-header">
+            <h4>🎯 Accuracy Progression Curve</h4>
+            <span class="chart-tag">Train vs Validation Accuracy</span>
+          </div>
+          <div class="chart-canvas-wrapper">
+            <canvas id="accCurveChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Non-linear Decision Boundary -->
+      <div class="card chart-card mt-4">
+        <div class="chart-header">
+          <h4>🌐 Non-Linear Decision Boundary (Concentric Circles)</h4>
+          <span class="chart-tag">Pure NumPy MLP Non-Linear Separation</span>
+        </div>
+        <p class="chart-desc">Demonstration showing how hidden non-linear activations allow a 2-layer NumPy MLP to warp feature space and perfectly separate concentric circles that a linear classifier cannot solve.</p>
+        <div class="chart-canvas-wrapper" style="height: 380px;">
+          <canvas id="decisionBoundaryChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: ACTIVATIONS & PERCEPTRON -->
+    <section id="activations-tab" class="tab-content">
+      <div class="section-title-wrap">
+        <h3>📈 Perceptrons &amp; Activation Functions</h3>
+        <p>Mathematical behavior, formulas, and derivative dynamics of standard neural network activation functions.</p>
+      </div>
+
+      <div class="control-panel-card card mb-4">
+        <div class="panel-header">
+          <h4>Select Activation Function</h4>
+          <div class="btn-group-chips" id="activation-chips">
+            <button class="chip-btn active" data-act="relu">ReLU</button>
+            <button class="chip-btn" data-act="leaky_relu">Leaky ReLU</button>
+            <button class="chip-btn" data-act="sigmoid">Sigmoid</button>
+            <button class="chip-btn" data-act="tanh">Tanh</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2col">
+        <!-- Activation Chart -->
+        <div class="card chart-card">
+          <div class="chart-header">
+            <h4 id="act-chart-title">ReLU Function &amp; Derivative</h4>
+            <span class="chart-tag" id="act-range-tag">Range: [0, ∞)</span>
+          </div>
+          <div class="chart-canvas-wrapper" style="height: 340px;">
+            <canvas id="activationCurveChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Mathematical Details -->
+        <div class="card detail-card">
+          <h4 id="act-name-display">Rectified Linear Unit (ReLU)</h4>
+          <div class="formula-box">
+            <div class="formula-row">
+              <span class="formula-label">Forward:</span>
+              <code id="act-formula" class="formula-code">f(z) = max(0, z)</code>
+            </div>
+            <div class="formula-row">
+              <span class="formula-label">Derivative:</span>
+              <code id="act-deriv" class="formula-code">f'(z) = 1 if z > 0 else 0</code>
+            </div>
+          </div>
+
+          <div class="pro-con-grid mt-3">
+            <div class="pro-card">
+              <h5>✅ Advantages</h5>
+              <p id="act-pros">Computationally efficient, no vanishing gradient for positive activations, promotes sparse representations.</p>
+            </div>
+            <div class="pro-card con-card">
+              <h5>⚠️ Trade-offs &amp; Pitfalls</h5>
+              <p id="act-cons">"Dying ReLU" issue where neurons permanently output zero if weights push inputs into negative territory.</p>
+            </div>
+          </div>
+
+          <!-- Perceptron Rosenblatt Overview -->
+          <div class="mt-4 pt-3 border-top">
+            <h5>Single-Layer Perceptron (Rosenblatt 1957)</h5>
+            <p class="text-muted text-sm">
+              The fundamental building block of neural networks computes a linear combination <code>z = wᵀx + b</code> and applies a step activation function. It updates parameters strictly upon misclassifications: <code>w ← w + η(y - ŷ)x</code>. Unlike multi-layer nets, a single perceptron can only learn linearly separable patterns (failing on XOR).
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: LOSS FUNCTIONS & OPTIMIZERS -->
+    <section id="optimizers-tab" class="tab-content">
+      <div class="section-title-wrap">
+        <h3>🎯 Loss Functions &amp; Optimization Algorithms</h3>
+        <p>Comparing convergence speeds and trajectory paths on anisotropic loss landscapes for Vanilla SGD, Momentum, and Adam.</p>
+      </div>
+
+      <!-- Optimizer Trajectory Chart -->
+      <div class="grid-2col">
+        <div class="card chart-card">
+          <div class="chart-header">
+            <h4>🧭 2D Loss Surface Optimization Trajectory</h4>
+            <span class="chart-tag">Ravine Contour Navigation</span>
+          </div>
+          <p class="chart-desc">Simulated path on <code>f(x, y) = 0.5(x² + 10y²)</code>. Notice how Vanilla SGD oscillates across steep walls while Adam smoothly cuts straight toward the global minimum.</p>
+          <div class="chart-canvas-wrapper" style="height: 340px;">
+            <canvas id="optimizerTrajectoryChart"></canvas>
+          </div>
+        </div>
+
+        <div class="card chart-card">
+          <div class="chart-header">
+            <h4>📉 Loss Reduction per Step</h4>
+            <span class="chart-tag">Convergence Velocity</span>
+          </div>
+          <p class="chart-desc">Tracks loss decay across 40 optimization steps. Adam and Momentum reach low error regimes in fewer steps than Vanilla SGD.</p>
+          <div class="chart-canvas-wrapper" style="height: 340px;">
+            <canvas id="optimizerLossChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparative Explanations -->
+      <div class="grid-3col mt-4">
+        <div class="card algo-card">
+          <div class="algo-header">
+            <span class="algo-badge badge-sgd">SGD</span>
+            <h4>Stochastic Gradient Descent</h4>
+          </div>
+          <code class="algo-formula">w ← w - α · ∇L(w)</code>
+          <p>Updates parameters strictly proportional to current negative gradient. Susceptible to oscillations in steep ravines and slow escape from saddle points.</p>
+        </div>
+
+        <div class="card algo-card">
+          <div class="algo-header">
+            <span class="algo-badge badge-momentum">Momentum</span>
+            <h4>SGD with Momentum</h4>
+          </div>
+          <code class="algo-formula">v ← βv + (1-β)∇L; w ← w - α·v</code>
+          <p>Maintains an exponentially decaying moving average of previous velocity vectors. Cancels out perpendicular oscillations and accelerates along high-curvature trajectories.</p>
+        </div>
+
+        <div class="card algo-card">
+          <div class="algo-header">
+            <span class="algo-badge badge-adam">Adam</span>
+            <h4>Adaptive Moment Estimation</h4>
+          </div>
+          <code class="algo-formula">w ← w - (α / (√v̂ + ε)) · m̂</code>
+          <p>Combines 1st moment (momentum) and 2nd uncentered moment (RMSProp) with bias correction. Automatically adapts individual learning rates for each parameter.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: LIVE INFERENCE -->
+    <section id="inference-tab" class="tab-content">
+      <div class="section-title-wrap">
+        <h3>🔮 Live Model Serving &amp; Inference Testing</h3>
+        <p>Test real-time student performance classification using the serialized pipeline loaded dynamically via <code>joblib</code> or <code>pickle</code>.</p>
+      </div>
+
+      <div class="grid-2col">
+        <!-- Input Form -->
+        <div class="card form-card">
+          <h4>Student Feature Profile</h4>
+          <form id="inference-form" class="mt-3">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="inf-age">Age</label>
+                <input type="number" id="inf-age" value="20" min="17" max="30" required>
+              </div>
+              <div class="form-group">
+                <label for="inf-gender">Gender</label>
+                <select id="inf-gender" class="custom-select">
+                  <option value="Female">Female</option>
+                  <option value="Male">Male</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="inf-dept">Department</label>
+                <select id="inf-dept" class="custom-select">
+                  <option value="Computer Science">Computer Science</option>
+                  <option value="Information Technology">Information Technology</option>
+                  <option value="Electronics">Electronics</option>
+                  <option value="Mechanical">Mechanical</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="inf-hours">Study Hours / Week</label>
+                <input type="number" id="inf-hours" value="18" min="0" max="60" step="1" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="inf-attendance">Attendance Rate (%)</label>
+                <input type="number" id="inf-attendance" value="88" min="0" max="100" step="1" required>
+              </div>
+              <div class="form-group">
+                <label for="inf-math">Math Score (0-100)</label>
+                <input type="number" id="inf-math" value="85" min="0" max="100" step="1" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="inf-reading">Reading Score (0-100)</label>
+                <input type="number" id="inf-reading" value="82" min="0" max="100" step="1" required>
+              </div>
+              <div class="form-group">
+                <label for="inf-writing">Writing Score (0-100)</label>
+                <input type="number" id="inf-writing" value="84" min="0" max="100" step="1" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="inf-serializer">Deserializer Backend</label>
+                <select id="inf-serializer" class="custom-select">
+                  <option value="joblib" selected>Joblib (Fast NumPy Deserializer)</option>
+                  <option value="pickle">Pickle (Standard Python Deserializer)</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary w-100 mt-2">
+              <span>🔮</span> Run Real-Time Classification
+            </button>
+          </form>
+        </div>
+
+        <!-- Output Result Display -->
+        <div class="card result-card">
+          <h4>Inference Outcome</h4>
+          <div id="result-placeholder" class="placeholder-wrap">
+            <span class="placeholder-icon">🚀</span>
+            <p>Submit student parameters on the left to invoke the deserialized model pipeline.</p>
+          </div>
+
+          <div id="result-content" class="result-details d-none">
+            <div class="prediction-badge-wrap">
+              <span id="pred-badge" class="prediction-badge badge-distinction">Distinction (CGPA ≥ 8.5)</span>
+            </div>
+
+            <div class="confidence-container mt-4">
+              <div class="conf-labels">
+                <span>Distinction Probability:</span>
+                <span id="pred-prob" class="font-bold">--%</span>
+              </div>
+              <div class="progress-bar-bg">
+                <div id="pred-progress" class="progress-bar-fill" style="width: 0%;"></div>
+              </div>
+            </div>
+
+            <div class="latency-grid mt-4">
+              <div class="latency-box">
+                <span class="latency-title">Model Load Time</span>
+                <span id="lat-load" class="latency-val">-- ms</span>
+              </div>
+              <div class="latency-box">
+                <span class="latency-title">Inference Latency</span>
+                <span id="lat-inf" class="latency-val">-- ms</span>
+              </div>
+              <div class="latency-box">
+                <span class="latency-title">Serializer</span>
+                <span id="lat-ser" class="latency-val">--</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <p>SIT Nagpur &bull; Hack-o-Week 5th Semester &bull; Week 15–16 Deep Learning &amp; Model Deployment</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
